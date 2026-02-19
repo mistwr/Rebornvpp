@@ -295,14 +295,16 @@ document.getElementById('particles').appendChild(canvas);
 const ctx=canvas.getContext('2d');
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
-window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
+window.addEventListener('resize',()=>{
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+});
 let particles=[];
 for(let i=0;i<80;i++){
   particles.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
     r:Math.random()*2+1,
-    speed:Math.random()*0.5+0.2,
     dx:(Math.random()-0.5)*0.5,
     dy:(Math.random()-0.5)*0.5
   });
@@ -314,8 +316,8 @@ function draw(){
     ctx.beginPath();
     ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
     ctx.fill();
-    p.x += p.dx;
-    p.y += p.dy;
+    p.x+=p.dx;
+    p.y+=p.dy;
     if(p.x<0)p.x=canvas.width;
     if(p.x>canvas.width)p.x=0;
     if(p.y<0)p.y=canvas.height;
@@ -325,12 +327,15 @@ function draw(){
 }
 draw();
 
-// Login senha
+// Login senha (ATUALIZADO)
 document.getElementById('loginForm').addEventListener('submit', function(e){
   e.preventDefault();
   const pwd = document.getElementById('password').value.trim();
-  if(pwd !== 'reborn'){ alert('Password incorreta!'); return; }
-  window.location.href = 'https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
+  if(pwd !== 'reborn'){
+    alert('Password incorreta!');
+    return;
+  }
+  window.location.href = 'https://rebornai.vercel.app/';
 });
 </script>
 
