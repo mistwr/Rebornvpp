@@ -3,96 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reborn AI - Treino Inteligente de Vendas</title>
+<title>Reborn AI - Potencialize Suas Vendas!</title>
 <style>
-html, body {
-  margin:0; padding:0; height:100%;
-  font-family:'Helvetica', sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  display:flex; justify-content:center; align-items:center;
-}
-.top-bar {
-  position:fixed; top:0; left:0; width:100%;
-  padding:10px 20px; background: rgba(0,0,0,0.9);
-  display:flex; justify-content:center; align-items:center;
-  z-index:1000; box-shadow:0 0 20px #0ff;
-}
-.top-bar .logo-text {
-  font-size:2rem; font-weight:bold; color:#0ff;
-  text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;
-  animation: glow 1.5s infinite alternate;
-}
-@keyframes glow {
-  from { text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; }
-  to { text-shadow:0 0 15px #0ff,0 0 30px #0ff,0 0 60px #0ff; }
-}
-
-.login-box {
-  background: rgba(0,0,0,0.95);
-  padding: 60px 30px 40px 30px;
-  border-radius:25px;
-  text-align:center;
-  max-width:450px;
-  width:90%;
-  box-shadow:0 0 50px #0ff;
-  animation: fadeIn 1s ease-in-out;
-}
-@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-
-.slideshow { width:100%; max-height:220px; border-radius:15px; margin-bottom:20px; overflow:hidden; }
-.slideshow img { width:100%; display:none; border-radius:15px; opacity:0; transition:opacity 1s ease-in-out; }
-.slideshow img.active { display:block; opacity:1; }
-
-h1 { color:#0ff; margin-bottom:12px; text-shadow:0 0 10px #0ff,0 0 25px #0ff,0 0 50px #0ff; font-size:1.8rem; }
-#motivation { color:#0ff; font-weight:bold; font-size:1.1rem; min-height:28px; margin-bottom:15px; }
-
-button {
-  width:100%; padding:12px; background:#0ff; color:#000; font-weight:bold;
-  border:none; border-radius:10px; font-size:1rem; cursor:pointer;
-  box-shadow:0 0 20px #0ff; transition:all 0.3s ease; margin-bottom:10px;
-}
-button:hover { transform:scale(1.1); box-shadow:0 0 35px #0ff; }
-
-/* Modal eBook */
-.modal {
-  display:none; position:fixed; z-index:1000; left:0; top:0;
-  width:100%; height:100%; background: rgba(0,0,0,0.95);
-  color:#0ff; justify-content:center; align-items:center;
-}
-.modal-content {
-  max-width:650px; width:90%; background:#111; padding:20px;
-  border-radius:15px; text-align:left; position:relative;
-}
-.close-modal {
-  position:absolute; top:10px; right:15px; font-size:1.5rem; cursor:pointer; color:#0ff;
-}
-.slide { display:none; }
-.slide.active { display:block; }
-.slide h2 { margin-top:0; color:#0ff; }
-.slide p { color:#ccc; font-size:1rem; }
-.slide-buttons { text-align:center; margin-top:15px; }
-
-/* Chatbox Reborn AI */
-#trainBox {
-  display:none; position:fixed; bottom:20px; right:20px;
-  width:360px; max-height:480px; background:#111; border-radius:15px;
-  box-shadow:0 0 35px #0ff; padding:10px;
-  overflow-y:auto; color:#0ff; flex-direction:column;
-  display:flex;
-}
-#trainMessages { margin-bottom:10px; max-height:330px; overflow-y:auto; }
-#trainMessages div { margin:5px 0; }
-#trainInput {
-  width:100%; padding:8px; border-radius:10px; border:none;
-  margin-bottom:5px; background:#222; color:#0ff;
-}
+  html, body {margin:0; padding:0; height:100%; font-family: 'Helvetica', sans-serif; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); display:flex; justify-content:center; align-items:center;}
+  .login-box {position:relative; background: rgba(0,0,0,0.9); padding:40px 30px; border-radius:25px; text-align:center; max-width:400px; width:90%; box-shadow: 0 0 40px #0ff;}
+  .logo-text {font-size:2rem; font-weight:bold; color:#0ff; text-shadow: 0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; margin-bottom:20px; display:inline-block; animation: glow 1.5s ease-in-out infinite alternate;}
+  @keyframes glow {from {text-shadow: 0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;} to {text-shadow: 0 0 15px #0ff,0 0 30px #0ff,0 0 60px #0ff;}}
+  .slideshow {width:100%; max-height:200px; border-radius:15px; margin-bottom:20px; overflow:hidden;}
+  .slideshow img {width:100%; display:none; border-radius:15px;}
+  .slideshow img.active {display:block;}
+  h1 { color:#0ff; margin-bottom:12px; text-shadow: 0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; }
+  p { color:#ccc; margin-bottom:15px; font-size:1rem; }
+  input[type="password"] {width:100%; padding:12px; border-radius:10px; border:none; margin-bottom:15px; text-align:center; background: rgba(255,255,255,0.1); color:#fff; font-weight:bold;}
+  input::placeholder { color:rgba(255,255,255,0.7);}
+  button {width:100%; padding:12px; background:#0ff; color:#000; font-weight:bold; border:none; border-radius:10px; font-size:1rem; cursor:pointer; box-shadow:0 0 15px #0ff; transition: all 0.3s ease; margin-bottom:10px;}
+  button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff; }
+  .error { color:red; margin-top:10px; display:none; font-weight:bold; }
+  /* Modal eBook */
+  .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.95); color:#0ff; justify-content:center; align-items:center;}
+  .modal-content { max-width:600px; width:90%; background:#111; padding:20px; border-radius:15px; text-align:left; position:relative;}
+  .close-modal { position:absolute; top:10px; right:15px; font-size:1.5rem; cursor:pointer; color:#0ff;}
+  .slide { display:none; }
+  .slide.active { display:block; }
+  .slide h2 { margin-top:0; color:#0ff; }
+  .slide p { color:#ccc; font-size:1rem; }
+  .slide-buttons { text-align:center; margin-top:15px; }
+  /* Chat Reborn AI */
+  .chat-box {display:none; flex-direction:column; width:90%; max-width:400px; background:#111; padding:15px; border-radius:15px; margin-top:20px; max-height:400px; overflow-y:auto;}
+  .chat-message {margin:5px 0; padding:8px 12px; border-radius:10px; max-width:80%;}
+  .chat-user {background:#0ff; color:#000; align-self:flex-end;}
+  .chat-reborn {background:#222; color:#0ff; align-self:flex-start;}
+  .chat-input {display:flex; margin-top:10px;}
+  .chat-input input {flex:1; padding:10px; border-radius:10px; border:none; margin-right:5px; background:#222; color:#0ff;}
 </style>
 </head>
 <body>
 
-<div class="top-bar"><div class="logo-text">Reborn AI</div></div>
+<div class="login-box" id="loginBox">
+  <div class="logo-text">Reborn AI</div>
 
-<div class="login-box">
   <div class="slideshow">
     <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg?auto=compress&cs=tinysrgb&w=600" class="active">
     <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600">
@@ -100,24 +49,27 @@ button:hover { transform:scale(1.1); box-shadow:0 0 35px #0ff; }
   </div>
 
   <h1>Hora de Vender! 🚀</h1>
-  <div id="motivation">Motivação e resultados estão aqui!</div>
+  <p>Use o Reborn AI para potencializar suas vendas, bater metas e conquistar resultados extraordinários!</p>
+
+  <form id="loginForm">
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Entrar no Reborn AI</button>
+  </form>
+  <div id="error" class="error">Password incorreta!</div>
 
   <button id="openEbook">O que é o Reborn AI?</button>
-  <button id="trainBtn">Treinar com Reborn AI</button>
 </div>
 
 <!-- Modal eBook -->
 <div id="ebookModal" class="modal">
   <div class="modal-content">
     <span class="close-modal" id="closeEbook">&times;</span>
-    <div class="slide active">
-      <h2>O que é o Reborn AI?</h2>
-      <p>Uma IA que automatiza tarefas, marketing, SMS, WhatsApp e ajuda a vender mais.</p>
-    </div>
-    <div class="slide">
-      <h2>Benefícios</h2>
-      <p>Mais tempo para focar no fechamento de negócios e bater metas de vendas.</p>
-    </div>
+    <div class="slide active"><h2>O que é o Reborn AI?</h2><p>Inteligência artificial para automatizar tarefas e otimizar vendas.</p></div>
+    <div class="slide"><h2>Benefícios</h2><p>Automatiza tarefas, melhora comunicação, aumenta resultados.</p></div>
+    <div class="slide"><h2>Marketing</h2><p>Cria posts, legendas e hashtags de forma rápida.</p></div>
+    <div class="slide"><h2>SMS & Email</h2><p>Envio eficiente em massa com validação automática.</p></div>
+    <div class="slide"><h2>WhatsApp</h2><p>Links diretos para conversas personalizadas com clientes.</p></div>
+    <div class="slide"><h2>Resultados</h2><p>Foque no fechamento de negócios e alcance suas metas.</p></div>
     <div class="slide-buttons">
       <button id="prevSlide">⬅️ Anterior</button>
       <button id="nextSlide">Próximo ➡️</button>
@@ -125,66 +77,61 @@ button:hover { transform:scale(1.1); box-shadow:0 0 35px #0ff; }
   </div>
 </div>
 
-<!-- Chatbox Treino Reborn AI -->
-<div id="trainBox">
-  <div id="trainMessages"></div>
-  <input id="trainInput" placeholder="Treinar com Reborn AI..." />
-  <button id="trainSend">Enviar</button>
+<!-- Chat Reborn AI -->
+<div class="chat-box" id="chatBox">
+  <div id="chatContent"></div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Treine o Reborn AI...">
+    <button id="sendChat">Enviar</button>
+  </div>
 </div>
 
-<script type="module">
-// Slideshow
-let slidesSS = document.querySelectorAll('.slideshow img');
-let currentSS = 0;
-setInterval(()=>{
-  slidesSS[currentSS].classList.remove('active');
-  currentSS = (currentSS+1) % slidesSS.length;
-  slidesSS[currentSS].classList.add('active');
-},3000);
+<script src="https://cdn.jsdelivr.net/npm/@crowdai/gpt4all-browser/gpt4all.min.js"></script>
+<script>
+  // Slideshow
+  let slidesSS = document.querySelectorAll('.slideshow img'); let currentSS=0;
+  setInterval(()=>{ slidesSS[currentSS].classList.remove('active'); currentSS=(currentSS+1)%slidesSS.length; slidesSS[currentSS].classList.add('active'); },3000);
 
-// Motivação
-const motivations = [
-  "Feche negócios como nunca! 💥",
-  "Seja o líder que inspira! 🚀",
-  "Automatize tarefas e venda mais! 💡",
-  "Bata metas e conquiste resultados extraordinários!"
-];
-let motIndex = 0;
-setInterval(()=>{
-  document.getElementById('motivation').textContent = motivations[motIndex];
-  motIndex = (motIndex+1) % motivations.length;
-},4000);
+  // Login
+  document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const pwd=document.getElementById('password').value.trim();
+    if(pwd!=='reborn'){document.getElementById('error').style.display='block';return;}
+    document.getElementById('loginBox').style.display='none';
+    document.getElementById('chatBox').style.display='flex';
+  });
 
-// Modal eBook
-const modal=document.getElementById('ebookModal');
-document.getElementById('openEbook').addEventListener('click',()=>{ modal.style.display='flex'; });
-document.getElementById('closeEbook').addEventListener('click',()=>{ modal.style.display='none'; });
-let slideIndex=0;
-const slides=modal.querySelectorAll('.slide');
-function showSlide(index){ slides.forEach(s=>s.classList.remove('active')); slides[index].classList.add('active'); }
-document.getElementById('prevSlide').addEventListener('click',()=>{ slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex); });
-document.getElementById('nextSlide').addEventListener('click',()=>{ slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex); });
+  // eBook Modal
+  const modal=document.getElementById('ebookModal');
+  document.getElementById('openEbook').addEventListener('click',()=>{modal.style.display='flex';});
+  document.getElementById('closeEbook').addEventListener('click',()=>{modal.style.display='none';});
+  let slideIndex=0; const slides=modal.querySelectorAll('.slide');
+  function showSlide(i){slides.forEach(s=>s.classList.remove('active')); slides[i].classList.add('active');}
+  document.getElementById('prevSlide').addEventListener('click',()=>{slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex);});
+  document.getElementById('nextSlide').addEventListener('click',()=>{slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex);});
 
-// Treino Reborn AI usando modelo em browser
-document.getElementById('trainBtn').addEventListener('click',()=>{ document.getElementById('trainBox').style.display='flex'; });
+  // GPT4All Chat
+  const chatContent=document.getElementById('chatContent');
+  const chatInput=document.getElementById('chatInput');
+  const sendChat=document.getElementById('sendChat');
 
-document.getElementById('trainSend').addEventListener('click', async()=>{
-  const input = document.getElementById('trainInput').value.trim();
-  if(!input) return;
-  const msgs=document.getElementById('trainMessages');
-  msgs.innerHTML += `<div><b>Você:</b> ${input}</div>`;
-  document.getElementById('trainInput').value='';
+  async function initChat(){
+    window.gpt = await GPT4All.init({model:'gpt4all-lora-quantized.bin'});
+  }
 
-  // Resposta automatizada sem backend
-  let reply="Reborn AI Treino: Foco em benefícios e conquiste a confiança do cliente!";
-  if(input.toLowerCase().includes("porta a porta")) reply="Porta a porta: abordagem positiva, valor imediato, confiança!";
-  if(input.toLowerCase().includes("call center")) reply="Call center: escute, responda soluções, seja empático!";
-  if(input.toLowerCase().includes("telemarketing")) reply="Telemarketing: destaque valor, seja breve e claro!";
-  if(input.toLowerCase().includes("lider")) reply="Líder: motive equipe, defina metas claras e feedback diário!";
+  async function sendMessage(msg){
+    if(!msg) return;
+    chatContent.innerHTML+='<div class="chat-message chat-user">'+msg+'</div>';
+    chatContent.scrollTop=chatContent.scrollHeight;
+    const resp=await gpt.generate(msg);
+    chatContent.innerHTML+='<div class="chat-message chat-reborn">'+resp+'</div>';
+    chatContent.scrollTop=chatContent.scrollHeight;
+  }
 
-  msgs.innerHTML += `<div><b>Reborn AI:</b> ${reply}</div>`;
-  msgs.scrollTop=msgs.scrollHeight;
-});
+  sendChat.addEventListener('click',()=>{sendMessage(chatInput.value); chatInput.value='';});
+  chatInput.addEventListener('keypress',e=>{if(e.key==='Enter'){sendMessage(chatInput.value); chatInput.value='';}});
+
+  initChat();
 </script>
 
 </body>
