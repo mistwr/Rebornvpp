@@ -23,7 +23,7 @@
     box-shadow: 0 0 40px #0ff;
   }
 
-  /* Logo em texto neon */
+  /* Logo neon em texto */
   .logo-text {
     font-size:2rem;
     font-weight:bold;
@@ -68,7 +68,7 @@
 
   .error { color:red; margin-top:10px; display:none; font-weight:bold; }
 
-  /* Modal e slides eBook */
+  /* Modal eBook */
   .modal {
     display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%;
     background: rgba(0,0,0,0.95); color:#0ff; justify-content:center; align-items:center;
@@ -92,7 +92,7 @@
 <div class="login-box">
   <div class="logo-text">Reborn AI</div>
 
-  <!-- Slideshow -->
+  <!-- Slideshow motivacional -->
   <div class="slideshow">
     <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg?auto=compress&cs=tinysrgb&w=600" class="active" alt="Líderes motivacionais">
     <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Equipe em reunião">
@@ -150,6 +150,31 @@
 </div>
 
 <script>
+  // Bloqueio inicial de login com sessionStorage
+  const correctPassword = 'reborn';
+  if(!sessionStorage.getItem('reborn_logged')){
+    document.body.innerHTML = `
+      <div style="display:flex;justify-content:center;align-items:center;height:100%;background:#000;color:#0ff;font-size:1.5rem;flex-direction:column;">
+        <h1>Reborn AI - Login Necessário</h1>
+        <form id="pwForm">
+          <input type="password" id="pwInput" placeholder="Password" required style="padding:10px;margin-top:10px;font-size:1rem;">
+          <button type="submit" style="padding:10px;margin-top:10px;font-size:1rem;">Entrar</button>
+          <div id="error" style="color:red;margin-top:10px;display:none;">Password incorreta!</div>
+        </form>
+      </div>
+    `;
+    document.getElementById('pwForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const pw = document.getElementById('pwInput').value.trim();
+      if(pw !== correctPassword){
+        document.getElementById('error').style.display = 'block';
+        return;
+      }
+      sessionStorage.setItem('reborn_logged','true');
+      location.reload();
+    });
+  }
+
   // Slideshow automático
   let slidesSS = document.querySelectorAll('.slideshow img');
   let currentSS = 0;
@@ -159,15 +184,16 @@
     slidesSS[currentSS].classList.add('active');
   }, 3000);
 
-  // Login
-  document.getElementById('loginForm').addEventListener('submit', function(e){
+  // Login simples dentro da page
+  document.getElementById('loginForm')?.addEventListener('submit', function(e){
     e.preventDefault();
     const pwd = document.getElementById('password').value.trim();
-    if(pwd !== 'reborn'){
+    if(pwd !== correctPassword){
       document.getElementById('error').style.display = 'block';
       return;
     }
-    window.location.reload(); // Mantém a sessão na mesma página
+    sessionStorage.setItem('reborn_logged','true');
+    location.reload();
   });
 
   // Modal eBook
@@ -177,7 +203,6 @@
 
   let slideIndex = 0;
   const slides = modal.querySelectorAll('.slide');
-
   function showSlide(index){
     slides.forEach(s=>s.classList.remove('active'));
     slides[index].classList.add('active');
