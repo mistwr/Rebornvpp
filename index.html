@@ -13,9 +13,9 @@ body { background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); display:flex;
 .logo-text { font-size:2rem; font-weight:bold; color:#0ff; text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; margin-bottom:15px; display:inline-block; animation:pulseGlow 2s infinite;}
 @keyframes pulseGlow {0%{text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;}50%{text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;}100%{text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;}}
 
-.slideshow { width:100%; max-height:400px; border-radius:15px; margin-bottom:20px; overflow:hidden; perspective:1000px; position:relative; }
-.slideshow img { width:100%; height:400px; border-radius:15px; backface-visibility:hidden; position:absolute; top:0; left:0; opacity:0; transform:rotateY(90deg); transition: all 1s ease-in-out; }
-.slideshow img.active { opacity:1; transform:rotateY(0deg); z-index:2; }
+.slideshow { width:100%; max-height:400px; margin-bottom:20px; border-radius:15px; overflow:hidden; display:flex; justify-content:center; align-items:center; position:relative; }
+.slideshow img { width:100%; max-height:400px; display:none; border-radius:15px; object-fit:cover; }
+.slideshow img.active { display:block; }
 
 h1 { color:#0ff; margin-bottom:10px; text-align:center; text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; font-size:1.8rem; }
 p { color:#ccc; margin-bottom:15px; font-size:1rem; text-align:center; }
@@ -51,7 +51,7 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
   .advantages li { font-size:0.85rem; }
   input[type="password"], button { padding:10px; font-size:0.9rem; }
   .slideshow { max-height:250px; }
-  .slideshow img { height:250px; }
+  .slideshow img { max-height:250px; }
 }
 </style>
 </head>
@@ -63,9 +63,9 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
   <div class="logo-text">Reborn AI</div>
 
   <div class="slideshow">
-    <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg" class="active">
-    <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg">
-    <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg">
+    <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg" class="active" alt="Líderes motivacionais">
+    <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg" alt="Equipe em reunião">
+    <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg" alt="Vendedores motivados">
   </div>
 
   <h1>Hora de Vender! 🚀</h1>
@@ -98,19 +98,7 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
   <div id="error" class="error">Password incorreta!</div>
 </div>
 
-<div id="ebookModal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" id="closeEbook">&times;</span>
-    <div class="slide active"><h2>O que é o Reborn AI?</h2><p>Uma inteligência artificial para automatizar e otimizar tarefas, desde websites até envio de SMS, emails e criação de propostas profissionais.</p></div>
-    <div class="slide"><h2>Benefícios para Vendas</h2><p>Automatiza tarefas repetitivas e permite focar no fechamento de negócios.</p></div>
-    <div class="slide-buttons">
-      <button id="prevSlide">⬅️ Anterior</button>
-      <button id="nextSlide">Próximo ➡️</button>
-    </div>
-  </div>
-</div>
-
-<!-- Música de fundo direta (loop) -->
+<!-- Música de fundo autoplay -->
 <audio id="bgAudio" autoplay loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2c5a14467e.mp3?filename=epic-trailer-11276.mp3" type="audio/mpeg">
 </audio>
@@ -125,12 +113,12 @@ function drawParticles(){ctx.clearRect(0,0,w,h);ctx.fillStyle='#0ff';particles.f
 drawParticles();
 
 // Slideshow
-let slidesSS=document.querySelectorAll('.slideshow img'),currentSS=0;
+let slides = document.querySelectorAll('.slideshow img'), current = 0;
 setInterval(()=>{
-  slidesSS[currentSS].classList.remove('active');
-  currentSS=(currentSS+1)%slidesSS.length;
-  slidesSS[currentSS].classList.add('active');
-},5000);
+  slides[current].classList.remove('active');
+  current = (current+1) % slides.length;
+  slides[current].classList.add('active');
+}, 5000);
 
 // Login
 document.getElementById('loginForm').addEventListener('submit',function(e){
@@ -140,19 +128,10 @@ document.getElementById('loginForm').addEventListener('submit',function(e){
   window.location.href='https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
 });
 
-// Modal
-const modal=document.getElementById('ebookModal');
+// PDF / Apresentação
 document.getElementById('openEbook').addEventListener('click',()=>{ 
   window.open('https://drive.google.com/file/d/1k2rznGUYVLfx0BBg6CXIGfdMmmFazfLs/view','_blank');
 });
-document.getElementById('closeEbook').addEventListener('click',()=>{ modal.style.display='none'; });
-
-// Slides modal
-let slideIndex=0;
-const slides=modal.querySelectorAll('.slide');
-function showSlide(index){ slides.forEach(s=>s.classList.remove('active')); slides[index].classList.add('active'); }
-document.getElementById('prevSlide').addEventListener('click',()=>{ slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex); });
-document.getElementById('nextSlide').addEventListener('click',()=>{ slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex); });
 
 // Pergunta animada + bullets
 const questionText = "💡 Pergunta do Reborn AI: \"Quer aumentar suas vendas e automatizar suas tarefas agora mesmo?\"";
