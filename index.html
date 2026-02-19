@@ -9,21 +9,23 @@ html, body { margin:0; padding:0; height:100%; font-family:'Helvetica',sans-seri
 body { background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); display:flex; justify-content:center; align-items:center; position:relative;}
 #particles { position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; }
 
-.login-box { position:relative; background:rgba(0,0,0,0.9); padding:30px; border-radius:25px; text-align:center; max-width:450px; width:90%; box-shadow:0 0 50px #0ff; z-index:1; display:flex; flex-direction:column; align-items:center; }
+.login-box { position:relative; background:rgba(0,0,0,0.9); padding:30px; border-radius:25px; text-align:center; max-width:500px; width:90%; box-shadow:0 0 50px #0ff; z-index:1; display:flex; flex-direction:column; align-items:center; }
 .logo-text { font-size:2rem; font-weight:bold; color:#0ff; text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; margin-bottom:15px; display:inline-block; animation:pulseGlow 2s infinite;}
 @keyframes pulseGlow {0%{text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;}50%{text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;}100%{text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;}}
-.slideshow { width:100%; max-height:300px; border-radius:15px; margin-bottom:20px; overflow:hidden; }
-.slideshow img { width:100%; height:auto; display:none; border-radius:15px; }
-.slideshow img.active { display:block; }
+
+.slideshow { width:100%; max-height:320px; border-radius:15px; margin-bottom:20px; overflow:hidden; perspective:1000px; position:relative; }
+.slideshow img, .slideshow iframe { width:100%; height:300px; border-radius:15px; backface-visibility:hidden; position:absolute; top:0; left:0; opacity:0; transform:rotateY(90deg); transition: all 1s ease-in-out; }
+.slideshow img.active, .slideshow iframe.active { opacity:1; transform:rotateY(0deg); z-index:2; }
 
 h1 { color:#0ff; margin-bottom:10px; text-align:center; text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; font-size:1.8rem; }
 p { color:#ccc; margin-bottom:15px; font-size:1rem; text-align:center; }
 .advantages { text-align:left; margin-bottom:20px; width:100%; }
 .advantages h2 { color:#0ff; font-size:1.2rem; margin-bottom:8px; text-shadow:0 0 5px #0ff;}
 .advantages ul { list-style:none; padding-left:0; margin:0; }
-.advantages li { color:#0ff; margin-bottom:6px; font-weight:bold; text-shadow:0 0 5px #0ff; position:relative; padding-left:20px; opacity:0; transform:translateX(-20px); transition: all 0.5s ease; }
+.advantages li { color:#0ff; margin-bottom:6px; font-weight:bold; text-shadow:0 0 5px #0ff; position:relative; padding-left:20px; opacity:0; transform:translateX(-30px) scale(0.9); transition: all 0.7s ease, text-shadow 1s ease; }
 .advantages li::before { content:'✔'; position:absolute; left:0; color:#00ffff; text-shadow:0 0 5px #0ff; }
-#rebornaisQuestion { color:#00ffff; font-weight:bold; margin-bottom:10px; text-shadow:0 0 5px #0ff; min-height:24px; text-align:center; }
+
+#rebornaisQuestion { color:#00ffff; font-weight:bold; margin-bottom:10px; text-shadow:0 0 5px #0ff; min-height:30px; text-align:center; font-size:1.1rem; }
 
 input[type="password"] { width:100%; padding:12px; border-radius:10px; border:none; margin-bottom:10px; text-align:center; background: rgba(255,255,255,0.1); color:#fff; font-weight:bold;}
 input::placeholder { color:rgba(255,255,255,0.7);}
@@ -49,6 +51,7 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
   .advantages li { font-size:0.85rem; }
   input[type="password"], button { padding:10px; font-size:0.9rem; }
   .slideshow { max-height:200px; }
+  .slideshow img, .slideshow iframe { height:200px; }
 }
 </style>
 </head>
@@ -63,6 +66,7 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
     <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg?auto=compress&cs=tinysrgb&w=600" class="active" alt="Líderes motivacionais">
     <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Equipe em reunião">
     <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vendedores motivados">
+    <iframe src="https://drive.google.com/file/d/1k2rznGUYVLfx0BBg6CXIGfdMmmFazfLs/preview" frameborder="0"></iframe>
   </div>
 
   <h1>Hora de Vender! 🚀</h1>
@@ -85,6 +89,12 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
     <button type="submit">Entrar no Reborn AI</button>
   </form>
 
+  <a href="https://buy.stripe.com/eVqdR93RbaHQ4ecbk95Rm00" target="_blank" style="text-decoration:none; width:100%;">
+    <button style="background:linear-gradient(45deg,#00ffff,#0099ff); color:#000; margin-top:5px; font-weight:bold;">
+      🛒 Comprar Reborn AI - €9,99
+    </button>
+  </a>
+
   <button id="openEbook">O que é o Reborn AI?</button>
   <div id="error" class="error">Password incorreta!</div>
 </div>
@@ -101,18 +111,31 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
   </div>
 </div>
 
+<!-- Música de fundo via YouTube (1h) -->
+<iframe id="ytAudio" 
+    src="https://www.youtube.com/embed/WMdhPtS5vio?autoplay=1&loop=1&playlist=WMdhPtS5vio&controls=0&mute=0" 
+    frameborder="0" 
+    style="display:none;">
+</iframe>
+
 <script>
-// Partículas
+// Partículas interativas
 const canvas=document.createElement('canvas');canvas.id='particleCanvas';document.getElementById('particles').appendChild(canvas);
 const ctx=canvas.getContext('2d');let w=canvas.width=window.innerWidth,h=canvas.height=window.innerHeight;
 window.addEventListener('resize',()=>{w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;});
-const particles=[];for(let i=0;i<50;i++){particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+1,speed:Math.random()*0.5+0.2});}
-function drawParticles(){ctx.clearRect(0,0,w,h);ctx.fillStyle='#0ff';particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();p.y-=p.speed;if(p.y<0)p.y=h;});requestAnimationFrame(drawParticles);}
+let mouse={x:w/2,y:h/2};
+window.addEventListener('mousemove',(e)=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+const particles=[];for(let i=0;i<80;i++){particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+1,speed:Math.random()*0.5+0.2,dx:(Math.random()-0.5)*0.5,dy:(Math.random()-0.5)*0.5});}
+function drawParticles(){ctx.clearRect(0,0,w,h);ctx.fillStyle='#0ff';particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();p.x+=p.dx;p.y+=p.dy;p.y-=p.speed;if(p.y<0)p.y=h;if(p.y>h)p.y=0;if(p.x<0)p.x=w;if(p.x>w)p.x=0;});requestAnimationFrame(drawParticles);}
 drawParticles();
 
-// Slideshow
-let slidesSS=document.querySelectorAll('.slideshow img'),currentSS=0;
-setInterval(()=>{slidesSS[currentSS].classList.remove('active');currentSS=(currentSS+1)%slidesSS.length;slidesSS[currentSS].classList.add('active');},3000);
+// Slideshow 3D
+let slidesSS=document.querySelectorAll('.slideshow img, .slideshow iframe'),currentSS=0;
+setInterval(()=>{
+  slidesSS[currentSS].classList.remove('active');
+  currentSS=(currentSS+1)%slidesSS.length;
+  slidesSS[currentSS].classList.add('active');
+},5000);
 
 // Login
 document.getElementById('loginForm').addEventListener('submit',function(e){
@@ -132,31 +155,13 @@ function showSlide(index){ slides.forEach(s=>s.classList.remove('active')); slid
 document.getElementById('prevSlide').addEventListener('click',()=>{ slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex); });
 document.getElementById('nextSlide').addEventListener('click',()=>{ slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex); });
 
-// Pergunta animada + bullets
+// Pergunta animada + bullets com emoção
 const questionText = "💡 Pergunta do Reborn AI: \"Quer aumentar suas vendas e automatizar suas tarefas agora mesmo?\"";
 let i = 0;
 const questionEl = document.getElementById('rebornaisQuestion');
 const bullets = document.querySelectorAll('.advantages li');
-
-function animateBullets(){
-  bullets.forEach((b,index)=>{
-    setTimeout(()=>{
-      b.style.opacity=1;
-      b.style.transform='translateX(0)';
-      b.style.textShadow='0 0 15px #00ffff';
-    }, index*500);
-  });
-}
-
-function typeQuestion(){
-  if(i < questionText.length){
-    questionEl.innerHTML += questionText.charAt(i);
-    i++;
-    setTimeout(typeQuestion, 50);
-  } else {
-    animateBullets();
-  }
-}
+function animateBullets(){ bullets.forEach((b,index)=>{ setTimeout(()=>{ b.style.opacity=1;b.style.transform='translateX(0) scale(1)';b.style.textShadow='0 0 25px #00ffff'; }, index*600); }); }
+function typeQuestion(){ if(i < questionText.length){ questionEl.innerHTML += questionText.charAt(i); i++; setTimeout(typeQuestion, 50); } else { animateBullets(); } }
 typeQuestion();
 </script>
 
