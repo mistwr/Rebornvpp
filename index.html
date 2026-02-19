@@ -91,6 +91,16 @@ p{
   font-size:0.95rem;
 }
 
+#rebornaisQuestion{
+  color:#00ffff;
+  font-weight:bold;
+  margin-bottom:10px;
+  text-shadow:0 0 10px #00ffff;
+  min-height:40px;
+  text-align:center;
+  font-size:1rem;
+}
+
 .price-wrapper{
   margin-top:15px;
 }
@@ -189,6 +199,44 @@ button:hover{
   z-index:999;
 }
 
+.advantages{
+  text-align:left;
+  margin-bottom:20px;
+  width:100%;
+}
+
+.advantages h2{
+  color:#00ffff;
+  font-size:1.1rem;
+  margin-bottom:8px;
+  text-shadow:0 0 5px #00ffff;
+}
+
+.advantages ul{
+  list-style:none;
+  padding-left:0;
+  margin:0;
+}
+
+.advantages li{
+  color:#00ffff;
+  margin-bottom:6px;
+  font-weight:bold;
+  text-shadow:0 0 5px #00ffff;
+  position:relative;
+  padding-left:20px;
+  opacity:0;
+  transform:translateX(-30px) scale(0.9);
+  transition: all 0.7s ease, text-shadow 1s ease;
+}
+
+.advantages li::before{
+  content:'✔';
+  position:absolute;
+  left:0;
+  color:#00ffff;
+  text-shadow:0 0 5px #00ffff;
+}
 </style>
 </head>
 
@@ -208,6 +256,21 @@ button:hover{
 
 <h1>Hora de Vender 🚀</h1>
 <p>Automatize vendas, gere leads e escale resultados com inteligência.</p>
+
+<div id="rebornaisQuestion"></div>
+
+<div class="advantages">
+  <h2>O que o Reborn AI faz por você:</h2>
+  <ul>
+    <li>Envio de SMS massiva</li>
+    <li>Envio de WhatsApp massivo</li>
+    <li>Envio de emails automáticos</li>
+    <li>Criação de sites em segundos</li>
+    <li>Geração de ebooks profissionais automaticamente</li>
+    <li>Interação direta: converse com o Reborn AI</li>
+    <li>Automatiza tarefas e gera relatórios inteligentes</li>
+  </ul>
+</div>
 
 <form id="loginForm">
   <input type="password" id="password" placeholder="Password" required>
@@ -310,9 +373,36 @@ document.getElementById('loginForm').addEventListener('submit',function(e){
     document.getElementById('error').style.display='block';
     return;
   }
-  // Redireciona após login correto
   window.location.href='https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
 });
+
+/* Frase do Reborn AI + animação bullets */
+const questionText="💡 Reborn AI: automatize vendas, SMS, WhatsApp, emails, crie sites e ebooks instantaneamente!";
+let i=0;
+const questionEl=document.getElementById('rebornaisQuestion');
+const bullets=document.querySelectorAll('.advantages li');
+
+function animateBullets(){
+  bullets.forEach((b,index)=>{
+    setTimeout(()=>{
+      b.style.opacity=1;
+      b.style.transform='translateX(0) scale(1)';
+      b.style.textShadow='0 0 25px #00ffff';
+    }, index*600);
+  });
+}
+
+function typeQuestion(){
+  if(i<questionText.length){
+    questionEl.innerHTML+=questionText.charAt(i);
+    i++;
+    setTimeout(typeQuestion,40);
+  } else {
+    animateBullets();
+  }
+}
+typeQuestion();
+
 </script>
 
 </body>
