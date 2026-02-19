@@ -12,10 +12,9 @@ body { background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); display:flex;
 .login-box { position:relative; background:rgba(0,0,0,0.9); padding:30px; border-radius:25px; text-align:center; max-width:450px; width:90%; box-shadow:0 0 50px #0ff; z-index:1; display:flex; flex-direction:column; align-items:center; }
 .logo-text { font-size:2rem; font-weight:bold; color:#0ff; text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; margin-bottom:15px; display:inline-block; animation:pulseGlow 2s infinite;}
 @keyframes pulseGlow {0%{text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;}50%{text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;}100%{text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;}}
-.slideshow { width:100%; max-height:200px; border-radius:15px; margin-bottom:20px; overflow:hidden; animation:glowSlide 2s infinite alternate;}
-.slideshow img { width:100%; height:auto; display:none; border-radius:15px;}
-.slideshow img.active { display:block;}
-@keyframes glowSlide {0%{filter:drop-shadow(0 0 5px #0ff);}50%{filter:drop-shadow(0 0 20px #0ff);}100%{filter:drop-shadow(0 0 5px #0ff);}}
+.slideshow { width:100%; max-height:300px; border-radius:15px; margin-bottom:20px; overflow:hidden; }
+.slideshow img { width:100%; height:auto; display:none; border-radius:15px; }
+.slideshow img.active { display:block; }
 
 h1 { color:#0ff; margin-bottom:10px; text-align:center; text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; font-size:1.8rem; }
 p { color:#ccc; margin-bottom:15px; font-size:1rem; text-align:center; }
@@ -49,7 +48,7 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
   .advantages h2 { font-size:1rem; }
   .advantages li { font-size:0.85rem; }
   input[type="password"], button { padding:10px; font-size:0.9rem; }
-  .slideshow { max-height:150px; }
+  .slideshow { max-height:200px; }
 }
 </style>
 </head>
