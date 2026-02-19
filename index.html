@@ -23,6 +23,7 @@
     box-shadow: 0 0 40px #0ff;
   }
 
+  /* Logo em texto neon */
   .logo-text {
     font-size:2rem;
     font-weight:bold;
@@ -47,11 +48,7 @@
   }
   .slideshow img.active { display:block; }
 
-  h1 {
-    color:#0ff; margin-bottom:12px;
-    text-shadow: 0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;
-  }
-
+  h1 { color:#0ff; margin-bottom:12px; text-shadow: 0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; }
   p { color:#ccc; margin-bottom:25px; font-size:1rem; }
 
   input[type="password"] {
@@ -65,12 +62,29 @@
     width:100%; padding:12px; background:#0ff; color:#000; font-weight:bold;
     border:none; border-radius:10px; font-size:1rem; cursor:pointer;
     box-shadow:0 0 15px #0ff; transition: all 0.3s ease;
+    margin-bottom:10px;
   }
-  button:hover {
-    transform: scale(1.05); box-shadow:0 0 25px #0ff;
-  }
+  button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff; }
 
   .error { color:red; margin-top:10px; display:none; font-weight:bold; }
+
+  /* Modal e slides eBook */
+  .modal {
+    display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.95); color:#0ff; justify-content:center; align-items:center;
+  }
+  .modal-content {
+    max-width:600px; width:90%; background:#111; padding:20px; border-radius:15px; text-align:left;
+    position:relative;
+  }
+  .close-modal {
+    position:absolute; top:10px; right:15px; font-size:1.5rem; cursor:pointer; color:#0ff;
+  }
+  .slide { display:none; }
+  .slide.active { display:block; }
+  .slide h2 { margin-top:0; color:#0ff; }
+  .slide p { color:#ccc; font-size:1rem; }
+  .slide-buttons { text-align:center; margin-top:15px; }
 </style>
 </head>
 <body>
@@ -93,17 +107,56 @@
     <button type="submit">Entrar no Reborn AI</button>
   </form>
 
+  <button id="openEbook">O que é o Reborn AI?</button>
+
   <div id="error" class="error">Password incorreta!</div>
+</div>
+
+<!-- Modal eBook -->
+<div id="ebookModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeEbook">&times;</span>
+
+    <div class="slide active">
+      <h2>O que é o Reborn AI?</h2>
+      <p>Uma inteligência artificial para automatizar e otimizar tarefas, desde a criação de websites e eBooks até ao envio de SMS e emails em massa.</p>
+    </div>
+    <div class="slide">
+      <h2>Benefícios para Vendas</h2>
+      <p>Automatiza tarefas repetitivas, melhora a comunicação e permite focar no fechamento de negócios.</p>
+    </div>
+    <div class="slide">
+      <h2>Marketing Digital</h2>
+      <p>Criação rápida de posts para redes sociais, legendas atrativas e hashtags para aumentar o alcance.</p>
+    </div>
+    <div class="slide">
+      <h2>SMS e Email em Massa</h2>
+      <p>Envio eficiente para listas de contactos, validação automática e remoção de duplicados.</p>
+    </div>
+    <div class="slide">
+      <h2>WhatsApp em Massa</h2>
+      <p>Geração de links diretos para conversas personalizadas com potenciais clientes.</p>
+    </div>
+    <div class="slide">
+      <h2>Resultados</h2>
+      <p>Automatize tarefas, melhore a comunicação e foque em fechar negócios, cumprindo metas de vendas.</p>
+    </div>
+
+    <div class="slide-buttons">
+      <button id="prevSlide">⬅️ Anterior</button>
+      <button id="nextSlide">Próximo ➡️</button>
+    </div>
+  </div>
 </div>
 
 <script>
   // Slideshow automático
-  let slides = document.querySelectorAll('.slideshow img');
-  let current = 0;
+  let slidesSS = document.querySelectorAll('.slideshow img');
+  let currentSS = 0;
   setInterval(() => {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
+    slidesSS[currentSS].classList.remove('active');
+    currentSS = (currentSS + 1) % slidesSS.length;
+    slidesSS[currentSS].classList.add('active');
   }, 3000);
 
   // Login
@@ -114,7 +167,29 @@
       document.getElementById('error').style.display = 'block';
       return;
     }
-    window.location.href = 'https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
+    window.location.reload(); // Mantém a sessão na mesma página
+  });
+
+  // Modal eBook
+  const modal = document.getElementById('ebookModal');
+  document.getElementById('openEbook').addEventListener('click', ()=>{ modal.style.display='flex'; });
+  document.getElementById('closeEbook').addEventListener('click', ()=>{ modal.style.display='none'; });
+
+  let slideIndex = 0;
+  const slides = modal.querySelectorAll('.slide');
+
+  function showSlide(index){
+    slides.forEach(s=>s.classList.remove('active'));
+    slides[index].classList.add('active');
+  }
+
+  document.getElementById('prevSlide').addEventListener('click', ()=>{
+    slideIndex = (slideIndex-1+slides.length)%slides.length;
+    showSlide(slideIndex);
+  });
+  document.getElementById('nextSlide').addEventListener('click', ()=>{
+    slideIndex = (slideIndex+1)%slides.length;
+    showSlide(slideIndex);
   });
 </script>
 
