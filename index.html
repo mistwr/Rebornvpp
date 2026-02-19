@@ -5,47 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reborn AI - Potencialize Suas Vendas!</title>
 <style>
-  html, body {margin:0; padding:0; height:100%; font-family: 'Helvetica', sans-serif; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); display:flex; justify-content:center; align-items:center;}
-  .login-box {position:relative; background: rgba(0,0,0,0.9); padding:40px 30px; border-radius:25px; text-align:center; max-width:400px; width:90%; box-shadow: 0 0 40px #0ff;}
-  .logo-text {font-size:2rem; font-weight:bold; color:#0ff; text-shadow: 0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; margin-bottom:20px; display:inline-block; animation: glow 1.5s ease-in-out infinite alternate;}
-  @keyframes glow {from {text-shadow: 0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;} to {text-shadow: 0 0 15px #0ff,0 0 30px #0ff,0 0 60px #0ff;}}
-  .slideshow {width:100%; max-height:200px; border-radius:15px; margin-bottom:20px; overflow:hidden;}
-  .slideshow img {width:100%; display:none; border-radius:15px;}
-  .slideshow img.active {display:block;}
-  h1 { color:#0ff; margin-bottom:12px; text-shadow: 0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; }
-  p { color:#ccc; margin-bottom:15px; font-size:1rem; }
-  input[type="password"] {width:100%; padding:12px; border-radius:10px; border:none; margin-bottom:15px; text-align:center; background: rgba(255,255,255,0.1); color:#fff; font-weight:bold;}
-  input::placeholder { color:rgba(255,255,255,0.7);}
-  button {width:100%; padding:12px; background:#0ff; color:#000; font-weight:bold; border:none; border-radius:10px; font-size:1rem; cursor:pointer; box-shadow:0 0 15px #0ff; transition: all 0.3s ease; margin-bottom:10px;}
-  button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff; }
+  html, body { margin:0; padding:0; height:100%; font-family:'Helvetica',sans-serif; background: linear-gradient(135deg,#0f2027,#203a43,#2c5364); display:flex; justify-content:center; align-items:center; }
+  .login-box { position:relative; background: rgba(0,0,0,0.9); padding:40px 30px; border-radius:25px; text-align:center; max-width:400px; width:90%; box-shadow:0 0 40px #0ff; }
+
+  /* Logo em texto neon */
+  .logo-text { font-size:2rem; font-weight:bold; color:#0ff; text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; margin-bottom:20px; display:inline-block; animation: glow 1.5s ease-in-out infinite alternate; }
+  @keyframes glow { from { text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; } to { text-shadow:0 0 15px #0ff,0 0 30px #0ff,0 0 60px #0ff; } }
+
+  /* Slideshow */
+  .slideshow { width:100%; max-height:200px; border-radius:15px; margin-bottom:20px; overflow:hidden; }
+  .slideshow img { width:100%; display:none; border-radius:15px; }
+  .slideshow img.active { display:block; }
+
+  h1 { color:#0ff; margin-bottom:12px; text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; }
+  p { color:#ccc; margin-bottom:25px; font-size:1rem; }
+
+  input[type="password"] { width:100%; padding:12px; border-radius:10px; border:none; margin-bottom:15px; text-align:center; background: rgba(255,255,255,0.1); color:#fff; font-weight:bold; }
+  input::placeholder { color:rgba(255,255,255,0.7); }
+
+  button { width:100%; padding:12px; background:#0ff; color:#000; font-weight:bold; border:none; border-radius:10px; font-size:1rem; cursor:pointer; box-shadow:0 0 15px #0ff; transition:all 0.3s ease; margin-bottom:10px; }
+  button:hover { transform:scale(1.05); box-shadow:0 0 25px #0ff; }
+
   .error { color:red; margin-top:10px; display:none; font-weight:bold; }
+
   /* Modal eBook */
-  .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.95); color:#0ff; justify-content:center; align-items:center;}
-  .modal-content { max-width:600px; width:90%; background:#111; padding:20px; border-radius:15px; text-align:left; position:relative;}
-  .close-modal { position:absolute; top:10px; right:15px; font-size:1.5rem; cursor:pointer; color:#0ff;}
+  .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.95); color:#0ff; justify-content:center; align-items:center; }
+  .modal-content { max-width:600px; width:90%; background:#111; padding:20px; border-radius:15px; text-align:left; position:relative; }
+  .close-modal { position:absolute; top:10px; right:15px; font-size:1.5rem; cursor:pointer; color:#0ff; }
   .slide { display:none; }
   .slide.active { display:block; }
   .slide h2 { margin-top:0; color:#0ff; }
   .slide p { color:#ccc; font-size:1rem; }
   .slide-buttons { text-align:center; margin-top:15px; }
-  /* Chat Reborn AI */
-  .chat-box {display:none; flex-direction:column; width:90%; max-width:400px; background:#111; padding:15px; border-radius:15px; margin-top:20px; max-height:400px; overflow-y:auto;}
-  .chat-message {margin:5px 0; padding:8px 12px; border-radius:10px; max-width:80%;}
-  .chat-user {background:#0ff; color:#000; align-self:flex-end;}
-  .chat-reborn {background:#222; color:#0ff; align-self:flex-start;}
-  .chat-input {display:flex; margin-top:10px;}
-  .chat-input input {flex:1; padding:10px; border-radius:10px; border:none; margin-right:5px; background:#222; color:#0ff;}
+
 </style>
 </head>
 <body>
 
-<div class="login-box" id="loginBox">
+<div class="login-box">
   <div class="logo-text">Reborn AI</div>
 
+  <!-- Slideshow -->
   <div class="slideshow">
-    <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg?auto=compress&cs=tinysrgb&w=600" class="active">
-    <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600">
-    <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg?auto=compress&cs=tinysrgb&w=600">
+    <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg?auto=compress&cs=tinysrgb&w=600" class="active" alt="Líderes motivacionais">
+    <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Equipe em reunião">
+    <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vendedores motivados">
   </div>
 
   <h1>Hora de Vender! 🚀</h1>
@@ -55,21 +59,44 @@
     <input type="password" id="password" placeholder="Password" required>
     <button type="submit">Entrar no Reborn AI</button>
   </form>
-  <div id="error" class="error">Password incorreta!</div>
 
   <button id="openEbook">O que é o Reborn AI?</button>
+  <button id="openChat">Acessar Reborn AI</button>
+  <button id="gerarProposta">Gerar Proposta</button>
+
+  <div id="error" class="error">Password incorreta!</div>
 </div>
 
 <!-- Modal eBook -->
 <div id="ebookModal" class="modal">
   <div class="modal-content">
     <span class="close-modal" id="closeEbook">&times;</span>
-    <div class="slide active"><h2>O que é o Reborn AI?</h2><p>Inteligência artificial para automatizar tarefas e otimizar vendas.</p></div>
-    <div class="slide"><h2>Benefícios</h2><p>Automatiza tarefas, melhora comunicação, aumenta resultados.</p></div>
-    <div class="slide"><h2>Marketing</h2><p>Cria posts, legendas e hashtags de forma rápida.</p></div>
-    <div class="slide"><h2>SMS & Email</h2><p>Envio eficiente em massa com validação automática.</p></div>
-    <div class="slide"><h2>WhatsApp</h2><p>Links diretos para conversas personalizadas com clientes.</p></div>
-    <div class="slide"><h2>Resultados</h2><p>Foque no fechamento de negócios e alcance suas metas.</p></div>
+
+    <div class="slide active">
+      <h2>O que é o Reborn AI?</h2>
+      <p>Uma inteligência artificial para automatizar e otimizar tarefas, desde a criação de websites e eBooks até ao envio de SMS e emails em massa.</p>
+    </div>
+    <div class="slide">
+      <h2>Benefícios para Vendas</h2>
+      <p>Automatiza tarefas repetitivas, melhora a comunicação e permite focar no fechamento de negócios.</p>
+    </div>
+    <div class="slide">
+      <h2>Marketing Digital</h2>
+      <p>Criação rápida de posts para redes sociais, legendas atrativas e hashtags para aumentar o alcance.</p>
+    </div>
+    <div class="slide">
+      <h2>SMS e Email em Massa</h2>
+      <p>Envio eficiente para listas de contactos, validação automática e remoção de duplicados.</p>
+    </div>
+    <div class="slide">
+      <h2>WhatsApp em Massa</h2>
+      <p>Geração de links diretos para conversas personalizadas com potenciais clientes.</p>
+    </div>
+    <div class="slide">
+      <h2>Resultados</h2>
+      <p>Automatize tarefas, melhore a comunicação e foque em fechar negócios, cumprindo metas de vendas.</p>
+    </div>
+
     <div class="slide-buttons">
       <button id="prevSlide">⬅️ Anterior</button>
       <button id="nextSlide">Próximo ➡️</button>
@@ -77,61 +104,59 @@
   </div>
 </div>
 
-<!-- Chat Reborn AI -->
-<div class="chat-box" id="chatBox">
-  <div id="chatContent"></div>
-  <div class="chat-input">
-    <input type="text" id="chatInput" placeholder="Treine o Reborn AI...">
-    <button id="sendChat">Enviar</button>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@crowdai/gpt4all-browser/gpt4all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-  // Slideshow
-  let slidesSS = document.querySelectorAll('.slideshow img'); let currentSS=0;
-  setInterval(()=>{ slidesSS[currentSS].classList.remove('active'); currentSS=(currentSS+1)%slidesSS.length; slidesSS[currentSS].classList.add('active'); },3000);
+  // Slideshow automático
+  let slidesSS = document.querySelectorAll('.slideshow img');
+  let currentSS = 0;
+  setInterval(() => {
+    slidesSS[currentSS].classList.remove('active');
+    currentSS = (currentSS + 1) % slidesSS.length;
+    slidesSS[currentSS].classList.add('active');
+  }, 3000);
 
   // Login
   document.getElementById('loginForm').addEventListener('submit', function(e){
     e.preventDefault();
-    const pwd=document.getElementById('password').value.trim();
-    if(pwd!=='reborn'){document.getElementById('error').style.display='block';return;}
-    document.getElementById('loginBox').style.display='none';
-    document.getElementById('chatBox').style.display='flex';
+    const pwd = document.getElementById('password').value.trim();
+    if(pwd !== 'reborn'){
+      document.getElementById('error').style.display = 'block';
+      return;
+    }
+    // Redireciona para Reborn AI real
+    window.location.href = 'https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
   });
 
-  // eBook Modal
-  const modal=document.getElementById('ebookModal');
-  document.getElementById('openEbook').addEventListener('click',()=>{modal.style.display='flex';});
-  document.getElementById('closeEbook').addEventListener('click',()=>{modal.style.display='none';});
-  let slideIndex=0; const slides=modal.querySelectorAll('.slide');
-  function showSlide(i){slides.forEach(s=>s.classList.remove('active')); slides[i].classList.add('active');}
-  document.getElementById('prevSlide').addEventListener('click',()=>{slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex);});
-  document.getElementById('nextSlide').addEventListener('click',()=>{slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex);});
+  // Modal eBook
+  const modal = document.getElementById('ebookModal');
+  document.getElementById('openEbook').addEventListener('click', ()=>{ modal.style.display='flex'; });
+  document.getElementById('closeEbook').addEventListener('click', ()=>{ modal.style.display='none'; });
 
-  // GPT4All Chat
-  const chatContent=document.getElementById('chatContent');
-  const chatInput=document.getElementById('chatInput');
-  const sendChat=document.getElementById('sendChat');
+  let slideIndex = 0;
+  const slides = modal.querySelectorAll('.slide');
+  function showSlide(index){ slides.forEach(s=>s.classList.remove('active')); slides[index].classList.add('active'); }
+  document.getElementById('prevSlide').addEventListener('click', ()=>{ slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex); });
+  document.getElementById('nextSlide').addEventListener('click', ()=>{ slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex); });
 
-  async function initChat(){
-    window.gpt = await GPT4All.init({model:'gpt4all-lora-quantized.bin'});
-  }
+  // Botão Acessar Reborn AI antes da senha: alerta
+  document.getElementById('openChat').addEventListener('click', ()=>{ alert("Insira a senha correta para acessar o Reborn AI real."); });
 
-  async function sendMessage(msg){
-    if(!msg) return;
-    chatContent.innerHTML+='<div class="chat-message chat-user">'+msg+'</div>';
-    chatContent.scrollTop=chatContent.scrollHeight;
-    const resp=await gpt.generate(msg);
-    chatContent.innerHTML+='<div class="chat-message chat-reborn">'+resp+'</div>';
-    chatContent.scrollTop=chatContent.scrollHeight;
-  }
-
-  sendChat.addEventListener('click',()=>{sendMessage(chatInput.value); chatInput.value='';});
-  chatInput.addEventListener('keypress',e=>{if(e.key==='Enter'){sendMessage(chatInput.value); chatInput.value='';}});
-
-  initChat();
+  // Gerar Proposta PDF
+  const { jsPDF } = window.jspdf;
+  document.getElementById('gerarProposta').addEventListener('click', async ()=>{
+    const doc = new jsPDF();
+    doc.setFontSize(22);
+    doc.setTextColor(0,255,255);
+    doc.text("Proposta Comercial - Reborn AI", 20, 20);
+    doc.setFontSize(14);
+    doc.setTextColor(0);
+    doc.text("Olá! Segue a proposta para os serviços selecionados. O Reborn AI garante maximizar resultados e facilitar processos de vendas.", 20,40,{maxWidth:170});
+    const imgUrl = "https://picsum.photos/400/200"; 
+    const imgData = await fetch(imgUrl).then(res=>res.blob()).then(blob=>new Promise(resolve=>{ const reader=new FileReader(); reader.onload=e=>resolve(e.target.result); reader.readAsDataURL(blob); }));
+    doc.addImage(imgData,'JPEG',20,60,170,80);
+    doc.setFontSize(10); doc.setTextColor(100); doc.text("Powered by Reborn AI",20,160);
+    doc.save("Proposta_Reborn_AI.pdf");
+  });
 </script>
 
 </body>
