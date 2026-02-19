@@ -23,10 +23,26 @@
     box-shadow: 0 0 40px #0ff;
   }
 
-  .logo {
-    width:140px;
-    margin-bottom:20px;
-    filter: drop-shadow(0 0 10px #0ff) drop-shadow(0 0 20px #0ff);
+  /* Logo em texto com efeitos */
+  .logo-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0ff;
+    margin-bottom: 20px;
+    text-shadow:
+      0 0 5px #0ff,
+      0 0 10px #0ff,
+      0 0 20px #0ff,
+      0 0 40px #00f,
+      0 0 80px #0ff;
+    letter-spacing: 2px;
+    animation: glow 1.5s infinite alternate;
+  }
+
+  @keyframes glow {
+    0% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #00f, 0 0 80px #0ff; }
+    50% { text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #00f, 0 0 80px #0ff, 0 0 120px #0ff; }
+    100% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #00f, 0 0 80px #0ff; }
   }
 
   .slideshow {
@@ -67,8 +83,8 @@
 <body>
 
 <div class="login-box">
-  <!-- Logo agora aponta para a pasta img -->
-  <img src="img/reborn-logo.png" alt="Reborn AI Logo" class="logo">
+  <!-- Logo em texto -->
+  <div class="logo-text">Reborn AI</div>
 
   <!-- Slideshow -->
   <div class="slideshow">
