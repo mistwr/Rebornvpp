@@ -14,8 +14,8 @@ body { background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); display:flex;
 @keyframes pulseGlow {0%{text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;}50%{text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;}100%{text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;}}
 
 .slideshow { width:100%; max-height:400px; border-radius:15px; margin-bottom:20px; overflow:hidden; perspective:1000px; position:relative; }
-.slideshow img, .slideshow iframe { width:100%; height:400px; border-radius:15px; backface-visibility:hidden; position:absolute; top:0; left:0; opacity:0; transform:rotateY(90deg); transition: all 1s ease-in-out; }
-.slideshow img.active, .slideshow iframe.active { opacity:1; transform:rotateY(0deg); z-index:2; }
+.slideshow img { width:100%; height:400px; border-radius:15px; backface-visibility:hidden; position:absolute; top:0; left:0; opacity:0; transform:rotateY(90deg); transition: all 1s ease-in-out; }
+.slideshow img.active { opacity:1; transform:rotateY(0deg); z-index:2; }
 
 h1 { color:#0ff; margin-bottom:10px; text-align:center; text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; font-size:1.8rem; }
 p { color:#ccc; margin-bottom:15px; font-size:1rem; text-align:center; }
@@ -51,7 +51,7 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
   .advantages li { font-size:0.85rem; }
   input[type="password"], button { padding:10px; font-size:0.9rem; }
   .slideshow { max-height:250px; }
-  .slideshow img, .slideshow iframe { height:250px; }
+  .slideshow img { height:250px; }
 }
 </style>
 </head>
@@ -63,10 +63,9 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
   <div class="logo-text">Reborn AI</div>
 
   <div class="slideshow">
-    <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg?auto=compress&cs=tinysrgb&w=900" class="active" alt="Líderes motivacionais">
-    <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Equipe em reunião">
-    <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Vendedores motivados">
-    <iframe src="https://drive.google.com/file/d/1k2rznGUYVLfx0BBg6CXIGfdMmmFazfLs/preview" frameborder="0"></iframe>
+    <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg" class="active">
+    <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg">
+    <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg">
   </div>
 
   <h1>Hora de Vender! 🚀</h1>
@@ -95,7 +94,7 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
     </button>
   </a>
 
-  <button id="openEbook">O que é o Reborn AI?</button>
+  <button id="openEbook">Abrir Apresentação / PDF</button>
   <div id="error" class="error">Password incorreta!</div>
 </div>
 
@@ -111,13 +110,10 @@ button:hover { transform: scale(1.05); box-shadow:0 0 35px #0ff,0 0 50px #00ffff
   </div>
 </div>
 
-<!-- Música de fundo via YouTube (1h) autoplay -->
-<iframe id="ytAudio" 
-    src="https://www.youtube.com/embed/WMdhPtS5vio?autoplay=1&loop=1&playlist=WMdhPtS5vio&controls=0&mute=0" 
-    frameborder="0" 
-    style="display:none;" 
-    allow="autoplay">
-</iframe>
+<!-- Música de fundo direta (loop) -->
+<audio id="bgAudio" autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2c5a14467e.mp3?filename=epic-trailer-11276.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 // Partículas
@@ -129,7 +125,7 @@ function drawParticles(){ctx.clearRect(0,0,w,h);ctx.fillStyle='#0ff';particles.f
 drawParticles();
 
 // Slideshow
-let slidesSS=document.querySelectorAll('.slideshow img, .slideshow iframe'),currentSS=0;
+let slidesSS=document.querySelectorAll('.slideshow img'),currentSS=0;
 setInterval(()=>{
   slidesSS[currentSS].classList.remove('active');
   currentSS=(currentSS+1)%slidesSS.length;
@@ -146,8 +142,12 @@ document.getElementById('loginForm').addEventListener('submit',function(e){
 
 // Modal
 const modal=document.getElementById('ebookModal');
-document.getElementById('openEbook').addEventListener('click',()=>{ modal.style.display='flex'; });
+document.getElementById('openEbook').addEventListener('click',()=>{ 
+  window.open('https://drive.google.com/file/d/1k2rznGUYVLfx0BBg6CXIGfdMmmFazfLs/view','_blank');
+});
 document.getElementById('closeEbook').addEventListener('click',()=>{ modal.style.display='none'; });
+
+// Slides modal
 let slideIndex=0;
 const slides=modal.querySelectorAll('.slide');
 function showSlide(index){ slides.forEach(s=>s.classList.remove('active')); slides[index].classList.add('active'); }
@@ -162,11 +162,6 @@ const bullets = document.querySelectorAll('.advantages li');
 function animateBullets(){ bullets.forEach((b,index)=>{ setTimeout(()=>{ b.style.opacity=1;b.style.transform='translateX(0) scale(1)';b.style.textShadow='0 0 25px #00ffff'; }, index*600); }); }
 function typeQuestion(){ if(i < questionText.length){ questionEl.innerHTML += questionText.charAt(i); i++; setTimeout(typeQuestion, 50); } else { animateBullets(); } }
 typeQuestion();
-
-// Tenta autoplay YouTube
-const ytAudio = document.getElementById('ytAudio');
-function playYT() { ytAudio.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*'); }
-window.addEventListener('load', () => { playYT(); });
 </script>
 
 </body>
