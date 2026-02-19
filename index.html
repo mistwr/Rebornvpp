@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reborn AI - Propostas Profissionais</title>
+<title>Reborn AI - Potencialize Suas Vendas!</title>
 <style>
 html, body { margin:0; padding:0; height:100%; font-family:'Helvetica',sans-serif; background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); display:flex; justify-content:center; align-items:center;}
 .login-box { position:relative; background:rgba(0,0,0,0.9); padding:40px 30px; border-radius:25px; text-align:center; max-width:400px; width:90%; box-shadow:0 0 40px #0ff;}
@@ -27,9 +27,9 @@ button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff;}
 .slide h2 { margin-top:0; color:#0ff;}
 .slide p { color:#ccc; font-size:1rem;}
 .slide-buttons { text-align:center; margin-top:15px;}
-#proposalModal input, #proposalModal textarea, #proposalModal select { width:100%; margin:8px 0; padding:10px; border-radius:8px; border:1px solid #00ffff30; background:#111; color:#00ffff; }
-#proposalModal button { margin-top:10px; width:100%; padding:12px; border:none; border-radius:8px; background:linear-gradient(90deg,#00ffff,#00aaff); cursor:pointer; font-weight:bold; }
-#proposalModal button:hover { transform: scale(1.05); box-shadow:0 0 20px #00ffff; }
+.audio-controls { margin-top:10px; text-align:center; }
+.audio-controls button { width:23%; margin:1%; padding:10px; font-weight:bold; border-radius:8px; border:none; background:linear-gradient(90deg,#00ffff,#00aaff); cursor:pointer; }
+.audio-controls button:hover { transform: scale(1.05); box-shadow:0 0 15px #0ff; }
 </style>
 </head>
 <body>
@@ -44,7 +44,7 @@ button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff;}
   </div>
 
   <h1>Hora de Vender! 🚀</h1>
-  <p>Use o Reborn AI para potencializar suas vendas e criar propostas profissionais instantâneas!</p>
+  <p>Use o Reborn AI para potencializar suas vendas e estratégias de vendas.</p>
 
   <form id="loginForm">
     <input type="password" id="password" placeholder="Password" required>
@@ -52,7 +52,13 @@ button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff;}
   </form>
 
   <button id="openEbook">O que é o Reborn AI?</button>
-  <button id="openProposal">Gerar Proposta Premium</button>
+
+  <div class="audio-controls">
+    <button id="prevTrack">⬅️ Anterior</button>
+    <button id="playAudio">▶️ Play</button>
+    <button id="pauseAudio">⏸️ Pausar</button>
+    <button id="nextTrack">Próximo ➡️</button>
+  </div>
 
   <div id="error" class="error">Password incorreta!</div>
 </div>
@@ -60,8 +66,8 @@ button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff;}
 <div id="ebookModal" class="modal">
   <div class="modal-content">
     <span class="close-modal" id="closeEbook">&times;</span>
-    <div class="slide active"><h2>O que é o Reborn AI?</h2><p>Uma inteligência artificial para automatizar e otimizar tarefas, desde websites até envio de SMS, emails e criação de propostas profissionais.</p></div>
-    <div class="slide"><h2>Benefícios para Vendas</h2><p>Automatiza tarefas repetitivas e permite focar no fechamento de negócios.</p></div>
+    <div class="slide active"><h2>O que é o Reborn AI?</h2><p>Uma IA para automatizar tarefas, criar estratégias de vendas, sites e conteúdos de marketing.</p></div>
+    <div class="slide"><h2>Benefícios para Vendas</h2><p>Automatiza tarefas e permite focar no fechamento de negócios com eficiência.</p></div>
     <div class="slide-buttons">
       <button id="prevSlide">⬅️ Anterior</button>
       <button id="nextSlide">Próximo ➡️</button>
@@ -69,30 +75,14 @@ button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff;}
   </div>
 </div>
 
-<div class="modal" id="proposalModal">
-  <div class="modal-content">
-    <span class="close-modal" id="closeProposal">&times;</span>
-    <h2>Gerar Proposta Premium</h2>
-    <label>Escolha o Template:</label>
-    <select id="templateSelect">
-      <option value="porta">Porta-a-Porta</option>
-      <option value="callcenter">Call Center</option>
-      <option value="telemarketing">Telemarketing</option>
-    </select>
+<audio id="epicAudio" loop></audio>
 
-    <input type="text" id="clientName" placeholder="Nome do Cliente">
-    <input type="text" id="product" placeholder="Produto/Serviço">
-    <input type="text" id="price" placeholder="Preço">
-    <textarea id="notes" placeholder="Observações"></textarea>
-    <button id="generatePDF">Gerar PDF Profissional</button>
-  </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
+// Slideshow automático
 let slidesSS=document.querySelectorAll('.slideshow img'),currentSS=0;
 setInterval(()=>{slidesSS[currentSS].classList.remove('active');currentSS=(currentSS+1)%slidesSS.length;slidesSS[currentSS].classList.add('active');},3000);
 
+// Login com redirecionamento
 document.getElementById('loginForm').addEventListener('submit',function(e){
   e.preventDefault();
   const pwd=document.getElementById('password').value.trim();
@@ -100,6 +90,7 @@ document.getElementById('loginForm').addEventListener('submit',function(e){
   window.location.href='https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
 });
 
+// Modal Ebook
 const modal=document.getElementById('ebookModal');
 document.getElementById('openEbook').addEventListener('click',()=>{ modal.style.display='flex'; });
 document.getElementById('closeEbook').addEventListener('click',()=>{ modal.style.display='none'; });
@@ -109,62 +100,22 @@ function showSlide(index){ slides.forEach(s=>s.classList.remove('active')); slid
 document.getElementById('prevSlide').addEventListener('click',()=>{ slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex); });
 document.getElementById('nextSlide').addEventListener('click',()=>{ slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex); });
 
-const proposalModal=document.getElementById("proposalModal");
-document.getElementById("openProposal").addEventListener("click",()=>{ proposalModal.style.display="flex"; });
-document.getElementById("closeProposal").addEventListener("click",()=>{ proposalModal.style.display="none"; });
+// Música épica com múltiplas faixas
+const musicList=[
+  "https://cdn.pixabay.com/download/audio/2022/03/15/audio_2c5a14467e.mp3?filename=epic-trailer-11276.mp3",
+  "https://cdn.pixabay.com/download/audio/2022/03/15/audio_1234abcd.mp3?filename=epic-battle-11456.mp3",
+  "https://cdn.pixabay.com/download/audio/2021/12/25/audio_9f2e12.mp3?filename=epic-orchestral-11022.mp3"
+];
+let currentTrack=0;
+const audio=document.getElementById('epicAudio');
 
-document.getElementById("generatePDF").addEventListener("click",()=>{
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-
-  const template = document.getElementById("templateSelect").value;
-  const client = document.getElementById("clientName").value.trim();
-  const product = document.getElementById("product").value.trim();
-  const price = document.getElementById("price").value.trim();
-  const notes = document.getElementById("notes").value.trim();
-
-  if(!client && !product && !price && !notes){
-    alert("Preencha pelo menos um campo para gerar a proposta!");
-    return;
-  }
-
-  // Cabeçalho neon
-  doc.setFillColor(0,255,255);
-  doc.rect(0,0,210,25,'F');
-  doc.setFontSize(16);
-  doc.setTextColor(0,0,0);
-  doc.text("Reborn AI", 15, 17);
-
-  let title = "", body = "", imgURL = "";
-
-  if(template==="porta"){
-    title="Proposta Porta-a-Porta";
-    imgURL="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg?auto=compress&cs=tinysrgb&w=400";
-    body = `Olá ${client || "[Cliente]"},\n\nProduto: ${product || "[Produto]"}\nPreço: ${price || "[Preço]"}\nVantagens: Atendimento personalizado, Demonstração no local, Fechamento rápido\nObservações: ${notes || "[Sem observações]"}`;
-  } else if(template==="callcenter"){
-    title="Proposta Call Center";
-    imgURL="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=400";
-    body = `Prezado(a) ${client || "[Cliente]"},\n\nProduto: ${product || "[Produto]"}\nPreço: ${price || "[Preço]"}\nBenefícios: Atendimento remoto eficiente, Suporte dedicado, Decisão rápida\nObservações: ${notes || "[Sem observações]"}`;
-  } else if(template==="telemarketing"){
-    title="Proposta Telemarketing";
-    imgURL="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg?auto=compress&cs=tinysrgb&w=400";
-    body = `Olá ${client || "[Cliente]"},\n\nProduto: ${product || "[Produto]"}\nPreço: ${price || "[Preço]"}\nDiferenciais: Contato proativo, Argumentação personalizada, Fechamento ágil\nObservações: ${notes || "[Sem observações]"}`;
-  }
-
-  doc.setFontSize(18);
-  doc.setTextColor(0,255,255);
-  doc.text(title, 15, 40);
-
-  // Adiciona imagem
-  doc.addImage(imgURL,'JPEG',15,50,180,60);
-
-  doc.setFontSize(12);
-  doc.setTextColor(255,255,255);
-  const splitBody = doc.splitTextToSize(body, 180);
-  doc.text(splitBody, 15, 120);
-
-  doc.save(`${client || "Cliente"}_Proposta_Premium.pdf`);
-});
+function playMusic(){ audio.src=musicList[currentTrack]; audio.play().catch(err=>console.log("Erro a tocar:",err)); }
+document.getElementById('playAudio').addEventListener('click',()=>{ playMusic(); });
+document.getElementById('pauseAudio').addEventListener('click',()=>{ audio.pause(); });
+document.getElementById('nextTrack').addEventListener('click',()=>{ currentTrack=(currentTrack+1)%musicList.length; playMusic(); });
+document.getElementById('prevTrack').addEventListener('click',()=>{ currentTrack=(currentTrack-1+musicList.length)%musicList.length; playMusic(); });
+audio.addEventListener('ended',()=>{ currentTrack=(currentTrack+1)%musicList.length; playMusic(); });
 </script>
+
 </body>
 </html>
