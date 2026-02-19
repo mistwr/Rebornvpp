@@ -4,29 +4,95 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reborn AI - Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 <style>
-html, body { margin:0; padding:0; height:100%; font-family:'Helvetica',sans-serif; background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); display:flex; justify-content:center; align-items:center;}
-.login-box { position:relative; background:rgba(0,0,0,0.9); padding:40px 30px; border-radius:25px; text-align:center; max-width:400px; width:90%; box-shadow:0 0 40px #0ff;}
-.logo-text { font-size:2rem; font-weight:bold; color:#0ff; text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff; margin-bottom:20px; display:inline-block; animation:glow 1.5s ease-in-out infinite alternate;}
-@keyframes glow {from{ text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;} to{ text-shadow:0 0 15px #0ff,0 0 30px #0ff,0 0 60px #0ff;}}
-.slideshow { width:100%; max-height:200px; border-radius:15px; margin-bottom:20px; overflow:hidden;}
-.slideshow img { width:100%; display:none; border-radius:15px;}
-.slideshow img.active { display:block;}
-h1 { color:#0ff; margin-bottom:12px; text-shadow:0 0 5px #0ff,0 0 15px #0ff,0 0 30px #0ff;}
-p { color:#ccc; margin-bottom:25px; font-size:1rem;}
-input[type="password"] { width:100%; padding:12px; border-radius:10px; border:none; margin-bottom:15px; text-align:center; background: rgba(255,255,255,0.1); color:#fff; font-weight:bold;}
-input::placeholder { color:rgba(255,255,255,0.7);}
-button { width:100%; padding:12px; background:#0ff; color:#000; font-weight:bold; border:none; border-radius:10px; font-size:1rem; cursor:pointer; box-shadow:0 0 15px #0ff; transition: all 0.3s ease; margin-bottom:10px;}
-button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff;}
-.error { color:red; margin-top:10px; display:none; font-weight:bold;}
-.modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.95); color:#0ff; justify-content:center; align-items:center;}
-.modal-content { max-width:600px; width:90%; background:#111; padding:20px; border-radius:15px; text-align:left; position:relative;}
-.close-modal { position:absolute; top:10px; right:15px; font-size:1.5rem; cursor:pointer; color:#0ff;}
-.slide { display:none;}
+html, body {
+  margin:0; padding:0; height:100%;
+  font-family:'Orbitron', sans-serif;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  display:flex; justify-content:center; align-items:center;
+  overflow-x:hidden;
+}
+.login-box {
+  position:relative; background:rgba(10,10,10,0.95);
+  padding:30px 25px; border-radius:25px; text-align:center;
+  max-width:400px; width:95%; box-shadow:0 0 50px #0ff;
+  box-sizing:border-box; transition:all 0.3s ease;
+  border:2px solid rgba(0,255,255,0.5);
+}
+.logo-text {
+  font-size:2.2rem; font-weight:700; color:#0ff;
+  text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 40px #0ff;
+  margin-bottom:25px; display:inline-block;
+  animation:glow 1.5s ease-in-out infinite alternate;
+}
+@keyframes glow {
+  from {text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 40px #0ff;}
+  to   {text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 80px #0ff;}
+}
+.slideshow { width:100%; max-height:220px; border-radius:20px; margin-bottom:25px; overflow:hidden; position:relative;}
+.slideshow img { width:100%; position:absolute; top:0; left:0; opacity:0; transition:opacity 1.5s ease-in-out; border-radius:20px; box-shadow:0 0 20px #0ff;}
+.slideshow img.active { opacity:1; z-index:1;}
+h1 { color:#0ff; margin-bottom:15px; text-shadow:0 0 10px #0ff,0 0 20px #0ff; font-size:1.6rem;}
+p { color:#ccc; margin-bottom:25px; font-size:1rem; line-height:1.4;}
+input[type="text"], input[type="email"], input[type="password"] {
+  width:100%; padding:14px; border-radius:12px; border:none;
+  margin-bottom:18px; text-align:center; background: rgba(0,255,255,0.08);
+  color:#fff; font-weight:bold; box-sizing:border-box;
+  font-size:1rem; box-shadow:0 0 10px rgba(0,255,255,0.3);
+  transition: all 0.3s ease;
+}
+input:focus { outline:none; background: rgba(0,255,255,0.15); box-shadow:0 0 20px #0ff;}
+input::placeholder { color:rgba(255,255,255,0.6);}
+button {
+  width:100%; padding:14px; background:linear-gradient(45deg,#0ff,#00ffff);
+  color:#000; font-weight:bold; border:none; border-radius:12px; font-size:1rem;
+  cursor:pointer; box-shadow:0 0 20px #0ff; transition: all 0.3s ease; margin-bottom:12px;
+}
+button:hover { transform: scale(1.05); box-shadow:0 0 40px #0ff;}
+.error { color:red; margin-top:12px; display:none; font-weight:bold; font-size:0.95rem; text-shadow:0 0 5px #f00;}
+.progress-bar-container { width:100%; height:10px; background:rgba(255,255,255,0.1); border-radius:5px; margin-top:12px; display:none; box-shadow:inset 0 0 5px #0ff;}
+.progress-bar { width:0%; height:100%; background:#0ff; border-radius:5px; transition:width 0.3s ease; }
+
+.modal {
+  display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.95); color:#0ff; justify-content:center; align-items:center;
+  padding:10px; opacity:0; transition:opacity 0.5s ease;
+}
+.modal.show { display:flex; opacity:1; }
+.modal-content {
+  max-width:600px; width:90%; background:#111; padding:25px; border-radius:20px;
+  text-align:left; position:relative; box-shadow:0 0 40px #0ff;
+  border:2px solid rgba(0,255,255,0.5);
+}
+.close-modal { position:absolute; top:12px; right:18px; font-size:1.6rem; cursor:pointer; color:#0ff; transition:all 0.3s ease;}
+.close-modal:hover { color:#00ffff; transform:rotate(90deg);}
+.slide { display:none; animation:fadeSlide 0.6s ease-in-out; }
+@keyframes fadeSlide { from {opacity:0;} to {opacity:1;} }
 .slide.active { display:block;}
-.slide h2 { margin-top:0; color:#0ff;}
-.slide p { color:#ccc; font-size:1rem;}
-.slide-buttons { text-align:center; margin-top:15px;}
+.slide h2 { margin-top:0; color:#0ff; font-size:1.3rem;}
+.slide p { color:#ccc; font-size:1rem; line-height:1.5;}
+.slide-buttons { text-align:center; margin-top:18px;}
+#visitorCounter { color:#0ff; font-weight:bold; margin-top:15px; text-align:center; font-size:0.95rem;}
+
+/* Responsividade geral */
+@media(max-width:700px){
+  .login-box { padding:25px 15px; }
+  .logo-text { font-size:1.8rem; }
+  h1 { font-size:1.4rem; }
+  p { font-size:0.95rem; }
+  input[type="text"], input[type="email"], input[type="password"] { font-size:0.95rem; padding:12px; }
+  button { font-size:0.95rem; padding:12px; }
+  .modal-content { width:95%; padding:15px; }
+}
+@media(max-width:400px){
+  .logo-text { font-size:1.5rem; }
+  h1 { font-size:1.2rem; }
+  p { font-size:0.9rem; }
+  input[type="text"], input[type="email"], input[type="password"] { font-size:0.9rem; padding:10px; }
+  button { font-size:0.9rem; padding:10px; }
+  .modal-content { width:95%; padding:12px; }
+}
 </style>
 </head>
 <body>
@@ -43,16 +109,29 @@ button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff;}
   <h1>Hora de Vender! 🚀</h1>
   <p>Use o Reborn AI para potencializar sua performance comercial.</p>
 
-  <form id="loginForm">
+  <!-- Formulário de nome e email -->
+  <form id="userForm">
+    <input type="text" id="userName" placeholder="Nome" required>
+    <input type="email" id="userEmail" placeholder="Email" required>
+    <button type="submit">Continuar</button>
+  </form>
+
+  <!-- Login com password -->
+  <form id="loginForm" style="display:none;">
     <input type="password" id="password" placeholder="Password" required>
     <button type="submit">Entrar no Reborn AI</button>
+    <div class="progress-bar-container">
+      <div class="progress-bar"></div>
+    </div>
   </form>
 
   <button id="openEbook">O que é o Reborn AI?</button>
-
   <div id="error" class="error">Password incorreta!</div>
+
+  <p id="visitorCounter"></p>
 </div>
 
+<!-- Modal informativo -->
 <div id="ebookModal" class="modal">
   <div class="modal-content">
     <span class="close-modal" id="closeEbook">&times;</span>
@@ -72,34 +151,67 @@ button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff;}
 </div>
 
 <script>
-// Slideshow automático
+// Slideshow com fade suave
 let slidesSS=document.querySelectorAll('.slideshow img'),currentSS=0;
 setInterval(()=>{
   slidesSS[currentSS].classList.remove('active');
   currentSS=(currentSS+1)%slidesSS.length;
   slidesSS[currentSS].classList.add('active');
-},3000);
+},4000);
 
-// Login com redirecionamento
+// Formulário nome/email
+document.getElementById('userForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('userName').value.trim();
+  const email = document.getElementById('userEmail').value.trim();
+  if(!name || !email){ alert("Preencha nome e email."); return; }
+  console.log("Nome:", name, "Email:", email);
+  document.getElementById('userForm').style.display='none';
+  document.getElementById('loginForm').style.display='block';
+});
+
+// Login com barra de progresso e redirecionamento
 document.getElementById('loginForm').addEventListener('submit',function(e){
   e.preventDefault();
   const pwd=document.getElementById('password').value.trim();
+  const errorEl = document.getElementById('error');
+  const progressContainer = document.querySelector('.progress-bar-container');
+  const progressBar = document.querySelector('.progress-bar');
+
+  errorEl.style.display='none';
+
   if(pwd!=='reborn'){ 
-    document.getElementById('error').style.display='block'; 
+    errorEl.style.display='block'; 
     return; 
   }
-  window.location.href = 'https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
+
+  progressContainer.style.display='block';
+  progressBar.style.width='0%';
+  let width=0;
+  const interval = setInterval(()=>{
+    if(width>=100){ clearInterval(interval); window.location.href='https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/'; }
+    width+=2;
+    progressBar.style.width = width + '%';
+  },30);
 });
 
 // Modal eBook
 const modal=document.getElementById('ebookModal');
-document.getElementById('openEbook').addEventListener('click',()=> { modal.style.display='flex'; });
-document.getElementById('closeEbook').addEventListener('click',()=> { modal.style.display='none'; });
+document.getElementById('openEbook').addEventListener('click',()=> { modal.classList.add('show'); });
+document.getElementById('closeEbook').addEventListener('click',()=> { modal.classList.remove('show'); });
 let slideIndex=0;
 const slides=modal.querySelectorAll('.slide');
 function showSlide(i){ slides.forEach(s=>s.classList.remove('active')); slides[i].classList.add('active'); }
 document.getElementById('prevSlide').addEventListener('click',()=>{ slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex); });
 document.getElementById('nextSlide').addEventListener('click',()=>{ slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex); });
+
+// Tracker de visitas
+(function(){
+  let visits = localStorage.getItem('reborn_visits') || 0;
+  visits++;
+  localStorage.setItem('reborn_visits', visits);
+  document.getElementById('visitorCounter').textContent = `Número de visitas neste navegador: ${visits}`;
+})();
 </script>
 
 </body>
