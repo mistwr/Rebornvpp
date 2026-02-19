@@ -27,9 +27,6 @@ button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff;}
 .slide h2 { margin-top:0; color:#0ff;}
 .slide p { color:#ccc; font-size:1rem;}
 .slide-buttons { text-align:center; margin-top:15px;}
-.audio-controls { margin-top:10px; text-align:center; }
-.audio-controls button { width:48%; margin:1%; padding:10px; font-weight:bold; border-radius:8px; border:none; background:linear-gradient(90deg,#00ffff,#00aaff); cursor:pointer; }
-.audio-controls button:hover { transform: scale(1.05); box-shadow:0 0 15px #0ff; }
 </style>
 </head>
 <body>
@@ -52,12 +49,6 @@ button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff;}
   </form>
 
   <button id="openEbook">O que é o Reborn AI?</button>
-
-  <div class="audio-controls">
-    <button id="playAudio">▶️ Play Música Épica</button>
-    <button id="pauseAudio">⏸️ Pausar Música</button>
-  </div>
-
   <div id="error" class="error">Password incorreta!</div>
 </div>
 
@@ -73,15 +64,16 @@ button:hover { transform: scale(1.05); box-shadow:0 0 25px #0ff;}
   </div>
 </div>
 
-<audio id="epicAudio" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2c5a14467e.mp3?filename=epic-trailer-11276.mp3" type="audio/mpeg">
-  Seu navegador não suporta áudio.
-</audio>
-
 <script>
+// Slideshow
 let slidesSS=document.querySelectorAll('.slideshow img'),currentSS=0;
-setInterval(()=>{slidesSS[currentSS].classList.remove('active');currentSS=(currentSS+1)%slidesSS.length;slidesSS[currentSS].classList.add('active');},3000);
+setInterval(()=>{
+  slidesSS[currentSS].classList.remove('active');
+  currentSS=(currentSS+1)%slidesSS.length;
+  slidesSS[currentSS].classList.add('active');
+},3000);
 
+// Login
 document.getElementById('loginForm').addEventListener('submit',function(e){
   e.preventDefault();
   const pwd=document.getElementById('password').value.trim();
@@ -89,6 +81,7 @@ document.getElementById('loginForm').addEventListener('submit',function(e){
   window.location.href='https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
 });
 
+// Modal
 const modal=document.getElementById('ebookModal');
 document.getElementById('openEbook').addEventListener('click',()=>{ modal.style.display='flex'; });
 document.getElementById('closeEbook').addEventListener('click',()=>{ modal.style.display='none'; });
@@ -97,10 +90,6 @@ const slides=modal.querySelectorAll('.slide');
 function showSlide(index){ slides.forEach(s=>s.classList.remove('active')); slides[index].classList.add('active'); }
 document.getElementById('prevSlide').addEventListener('click',()=>{ slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex); });
 document.getElementById('nextSlide').addEventListener('click',()=>{ slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex); });
-
-const audio=document.getElementById('epicAudio');
-document.getElementById('playAudio').addEventListener('click',()=>{ audio.play(); });
-document.getElementById('pauseAudio').addEventListener('click',()=>{ audio.pause(); });
 </script>
 
 </body>
