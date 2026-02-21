@@ -1,259 +1,199 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reborn AI</title>
-
+<title>Reborn AI - Potencialize Suas Vendas</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#000;color:#fff;overflow-x:hidden}
+html, body { margin:0; padding:0; height:100%; font-family:'Helvetica',sans-serif; overflow:hidden; }
+body { color:#00ffff; }
 
-/* VIDEO BACKGROUND */
-#video-bg{
-position:fixed;
-top:0;left:0;
-width:100vw;height:100vh;
-z-index:-2;
-overflow:hidden;
-}
-#video-bg iframe{
-width:100%;
-height:100%;
-pointer-events:none;
+/* Vídeo de fundo full screen */
+#bgVideo{
+  position:fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
 }
 
-/* OVERLAY */
-.overlay{
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.65);
-z-index:-1;
+/* Overlay neon */
+#overlay{
+  position:fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.55);
+  z-index:-1;
 }
 
-/* NAV */
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
-}
-nav h1{font-size:24px}
-nav button{
-padding:10px 20px;
-background:#00ffcc;
-border:none;
-cursor:pointer;
-font-weight:bold;
-border-radius:5px;
-}
+/* Box central */
+.login-box{ position:relative; background:rgba(0,0,0,0.85); padding:30px; border-radius:25px; text-align:center; max-width:700px; width:92%; box-shadow:0 0 60px #00ffff; z-index:1; display:flex; flex-direction:column; align-items:center; }
 
-/* HERO */
-.hero{
-text-align:center;
-padding:100px 20px 40px 20px;
-}
-.hero h2{font-size:40px;margin-bottom:20px}
-.hero p{font-size:18px;max-width:800px;margin:auto;margin-bottom:30px}
-.cta{
-padding:15px 30px;
-background:#00ffcc;
-border:none;
-font-size:18px;
-cursor:pointer;
-border-radius:8px;
-}
+.logo-text{ font-size:2rem; font-weight:bold; color:#00ffff; text-shadow:0 0 15px #00ffff,0 0 40px #00ffff; margin-bottom:15px; animation:pulseGlow 2s infinite; }
+@keyframes pulseGlow{0%{text-shadow:0 0 10px #00ffff;}50%{text-shadow:0 0 30px #00ffff;}100%{text-shadow:0 0 10px #00ffff;}}
 
-/* SLIDESHOW */
-.slideshow{
-display:flex;
-justify-content:center;
-margin:60px auto;
-max-width:900px;
-}
-.slideshow img{
-width:100%;
-border-radius:10px;
-display:none;
-}
-.slideshow img.active{display:block}
+.slideshow{ width:100%; max-height:300px; border-radius:15px; overflow:hidden; margin-bottom:20px; }
+.slideshow img{ width:100%; display:none; border-radius:15px; object-fit:cover; }
+.slideshow img.active{ display:block; }
 
-/* LOGIN MODAL */
-.modal{
-display:none;
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.8);
-justify-content:center;
-align-items:center;
-}
-.modal-content{
-background:#111;
-padding:40px;
-border-radius:10px;
-text-align:center;
-}
-.modal-content input{
-padding:10px;
-width:200px;
-margin:10px 0;
-}
-.modal-content button{
-padding:10px 20px;
-background:#00ffcc;
-border:none;
-cursor:pointer;
-}
+h1{ font-size:1.7rem; margin-bottom:10px; text-align:center; }
+p{ font-size:0.95rem; text-align:center; color:#ccc; }
 
-/* DASHBOARD */
-#dashboard{
-display:none;
-padding:60px 20px;
-max-width:900px;
-margin:auto;
-}
-.card{
-background:#111;
-padding:20px;
-margin-bottom:20px;
-border-radius:10px;
-}
-.card input{
-width:100%;
-padding:8px;
-margin:5px 0;
-}
-.card button{
-padding:8px 15px;
-background:#00ffcc;
-border:none;
-cursor:pointer;
-}
-.sales-list{
-margin-top:10px;
+#rebornaisDesc{ color:#00ffff; font-weight:bold; margin:15px 0; text-align:center; font-size:1rem; text-shadow:0 0 10px #00ffff; }
+
+.price-wrapper{ margin-top:15px; width:100%; }
+.old-price{ color:#888; text-decoration:line-through; margin:0; }
+.new-price{ font-size:2rem; color:#00ff88; font-weight:bold; text-shadow:0 0 25px #00ff88; animation:pricePulse 1.8s infinite; }
+@keyframes pricePulse{0%{transform:scale(1);}50%{transform:scale(1.06);}100%{transform:scale(1);} }
+.limited{ color:#ff4444; font-weight:bold; font-size:0.9rem; margin-bottom:5px; }
+
+input[type="password"]{ width:100%; padding:12px; border-radius:10px; border:none; margin-bottom:10px; text-align:center; background: rgba(255,255,255,0.1); color:#fff; font-weight:bold; }
+input::placeholder{ color:rgba(255,255,255,0.7); }
+
+button{ width:100%; padding:14px; border:none; border-radius:12px; background:linear-gradient(45deg,#00ffff,#0099ff); font-weight:bold; cursor:pointer; font-size:1rem; box-shadow:0 0 20px #00ffff; animation:breath 2s infinite; transition:0.3s; margin-bottom:10px; }
+button:hover{ transform:scale(1.05); }
+@keyframes breath{0%{box-shadow:0 0 15px #00ffff;}50%{box-shadow:0 0 40px #00ffff;}100%{box-shadow:0 0 15px #00ffff;} }
+
+.popup{ position:fixed; bottom:20px; left:20px; background:#111; color:#00ffff; padding:12px 18px; border-radius:12px; box-shadow:0 0 20px #00ffff; display:none; font-size:0.85rem; z-index:999; }
+
+/* Manual Interativo */
+.manual-container{ text-align:left; margin-top:20px; }
+.manual-item{ opacity:0; transition:opacity 1s; margin-bottom:10px; }
+.quiz-button{ display:block; width:100%; margin:5px 0; padding:12px; border-radius:10px; border:none; background:#00ffff; color:#111; font-weight:bold; cursor:pointer; }
+.quiz-button:hover{ background:#00ff88; }
+
+/* Responsividade */
+@media (max-width:600px){
+  .login-box{padding:20px;}
+  .logo-text{font-size:1.6rem;}
+  h1{font-size:1.4rem;}
+  #rebornaisDesc{font-size:0.9rem;}
+  .slideshow{max-height:200px;}
+  .slideshow img{max-height:200px;}
+  .new-price{font-size:1.6rem;}
+  input[type="password"], button{padding:10px; font-size:0.9rem;}
 }
 </style>
 </head>
-
 <body>
 
-<div id="video-bg">
-<iframe src="https://flixier.com/embed/LVPm3ayV?autoplay=1&mute=1&loop=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
+<!-- Vídeo full screen de fundo -->
+<video id="bgVideo" autoplay muted loop>
+  <source src="https://www.flixier.com/embed/LVPm3ayV" type="video/mp4">
+</video>
+<div id="overlay"></div>
 
-<div class="overlay"></div>
+<div class="login-box">
 
-<nav>
-<h1>REBORN AI</h1>
-<button onclick="openLogin()">Agents</button>
-</nav>
-
-<section class="hero">
-<h2>Transforma Vendedores em Máquinas de Conversão</h2>
-<p>
-O Reborn AI é a plataforma que permite equipas comerciais vender mais,
-automatizar processos e aumentar comissões sem esforço extra.
-Empresas ganham escala. Vendedores ganham dinheiro.
-</p>
-<button class="cta" onclick="openLogin()">Quero Acesso</button>
-</section>
+<div class="logo-text">Reborn AI</div>
 
 <div class="slideshow">
-<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" class="active">
-<img src="https://images.unsplash.com/photo-1551434678-e076c223a692">
-<img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
+  <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg" class="active">
+  <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg">
+  <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg">
 </div>
 
-<!-- LOGIN -->
-<div class="modal" id="loginModal">
-<div class="modal-content">
-<h2>Login Agents</h2>
-<input type="password" id="password" placeholder="Password">
-<br>
-<button onclick="login()">Entrar</button>
-</div>
+<h1>Hora de Vender 🚀</h1>
+<p>Automatize vendas, gere leads e escale resultados com inteligência.</p>
+
+<div id="rebornaisDesc">
+💡 O Reborn AI permite envio de SMS, WhatsApp e email massivo, criação de sites em segundos, geração automática de ebooks e interação direta com a inteligência de vendas.
 </div>
 
-<!-- DASHBOARD -->
-<section id="dashboard">
-<h2>Painel do Agente</h2>
+<div class="price-wrapper">
+<p class="old-price">Antes 69,99€</p>
+<div class="new-price">Agora 9,99€</div>
+<div class="limited">🔥 Oferta limitada</div>
 
-<div class="card">
-<h3>Registar Venda</h3>
-<input type="text" id="cliente" placeholder="Nome do Cliente">
-<input type="text" id="produto" placeholder="Produto / Serviço">
-<input type="number" id="valor" placeholder="Valor €">
-<button onclick="registarVenda()">Guardar Venda</button>
+<a href="https://buy.stripe.com/eVqdR93RbaHQ4ecbk95Rm00" target="_blank">
+<button>🛒 Garantir Acesso Agora</button>
+</a>
 </div>
 
-<div class="card">
-<h3>Performance</h3>
-<p>Total Vendas: <span id="totalVendas">0</span></p>
-<p>Total Faturação: €<span id="totalValor">0</span></p>
-<div class="sales-list" id="listaVendas"></div>
+<form id="loginForm">
+<input type="password" id="password" placeholder="Password" required>
+<button type="submit">Entrar no Reborn AI</button>
+</form>
+
+<div class="popup" id="popup"></div>
+
+<!-- Quiz -->
+<div id="quiz" style="display:none; text-align:center; margin-top:20px;">
+  <h3 id="quizQuestion"></h3>
+  <div id="quizAnswers"></div>
 </div>
 
-</section>
+<!-- Manual Interativo -->
+<div class="manual-container" id="manual" style="display:none;"></div>
 
 <script>
+// Slideshow
+let slides = document.querySelectorAll(".slideshow img"); let current=0;
+setInterval(()=>{ slides[current].classList.remove("active"); current=(current+1)%slides.length; slides[current].classList.add("active"); },4000);
 
-/* LOGIN */
-function openLogin(){
-document.getElementById("loginModal").style.display="flex";
-}
-function login(){
-const pass=document.getElementById("password").value;
-if(pass==="reborn"){
-document.getElementById("loginModal").style.display="none";
-document.querySelector(".hero").style.display="none";
-document.querySelector(".slideshow").style.display="none";
-document.getElementById("dashboard").style.display="block";
-}else{
-alert("Password errada");
-}
-}
+// Popup compras simuladas
+const names=["Carlos","Mariana","Rafael","João","Ana","Miguel","Sofia","Tiago"];
+function showPopup(){ let name = names[Math.floor(Math.random()*names.length)]; const popup=document.getElementById("popup"); popup.innerHTML = "🔥 "+name+" acabou de comprar Reborn AI"; popup.style.display="block"; setTimeout(()=>{popup.style.display="none";},4000);}
+setInterval(showPopup,7000);
 
-/* SLIDESHOW */
-let slides=document.querySelectorAll(".slideshow img");
-let index=0;
-setInterval(()=>{
-slides[index].classList.remove("active");
-index=(index+1)%slides.length;
-slides[index].classList.add("active");
-},3000);
+// Partículas
+const canvas=document.createElement('canvas'); document.body.appendChild(canvas); const ctx=canvas.getContext('2d'); canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
+let particles=[]; for(let i=0;i<80;i++){ particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-0.5)*0.5,dy:(Math.random()-0.5)*0.5}); }
+function draw(){ ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle="#00ffff"; particles.forEach(p=>{ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); p.x+=p.dx; p.y+=p.dy; if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0; }); requestAnimationFrame(draw); }
+draw();
 
-/* VENDAS */
-function registarVenda(){
-let cliente=document.getElementById("cliente").value;
-let produto=document.getElementById("produto").value;
-let valor=parseFloat(document.getElementById("valor").value);
-
-if(!cliente||!produto||!valor)return alert("Preenche todos os campos");
-
-let vendas=JSON.parse(localStorage.getItem("vendas"))||[];
-vendas.push({cliente,produto,valor});
-localStorage.setItem("vendas",JSON.stringify(vendas));
-mostrarVendas();
-}
-
-function mostrarVendas(){
-let vendas=JSON.parse(localStorage.getItem("vendas"))||[];
-let total=0;
-let lista=document.getElementById("listaVendas");
-lista.innerHTML="";
-vendas.forEach(v=>{
-total+=v.valor;
-lista.innerHTML+=`<p>${v.cliente} - ${v.produto} - €${v.valor}</p>`;
+// Login senha
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const pwd=document.getElementById('password').value.trim();
+  if(pwd!=='reborn'){ alert('Password incorreta!'); return; }
+  document.querySelector('.login-box').style.display='none';
+  document.getElementById('quiz').style.display='block';
+  startQuiz();
 });
-document.getElementById("totalVendas").innerText=vendas.length;
-document.getElementById("totalValor").innerText=total;
-}
-mostrarVendas();
 
+// Quiz interativo
+const quizData=[
+  {q:"Qual o principal benefício do Reborn AI?", a:["Automatizar vendas","Jogar","Dormir"]},
+  {q:"Que ferramentas inclui?", a:["SMS, WhatsApp, Email, Sites, Ebooks","Somente Email","Somente Sites"]},
+  {q:"Como melhora a performance?", a:["Aprendendo com dados","Mágica","Nada"]}
+];
+let currentQuiz=0;
+function startQuiz(){ showQuestion(); }
+function showQuestion(){
+  if(currentQuiz>=quizData.length){ showManualInteractive(); return; }
+  document.getElementById('quizQuestion').innerHTML="<h3>"+quizData[currentQuiz].q+"</h3>";
+  const answersDiv=document.getElementById('quizAnswers'); answersDiv.innerHTML="";
+  quizData[currentQuiz].a.forEach(ans=>{
+    let btn=document.createElement('button'); btn.className='quiz-button'; btn.innerText=ans;
+    btn.onclick=()=>{ currentQuiz++; showQuestion(); };
+    answersDiv.appendChild(btn);
+  });
+}
+
+// Manual interativo
+function showManualInteractive(){
+  document.getElementById('quiz').style.display='none';
+  const manual = document.getElementById('manual');
+  manual.style.display='block';
+  const items=[
+    "💬 <strong>Comunicação em Massa:</strong> Envio de <a href='#' target='_blank'>SMS, WhatsApp e Emails</a> automáticos.",
+    "🌐 <strong>Criação de Sites:</strong> Gere <a href='#' target='_blank'>landing pages e websites</a> em segundos.",
+    "📚 <strong>Conteúdos Automáticos:</strong> Produza <a href='#' target='_blank'>ebooks, apresentações e vídeos</a>.",
+    "📊 <strong>CRM Inteligente:</strong> Acompanhe <a href='#' target='_blank'>leads, performance e relatórios</a>.",
+    "🎯 <strong>Filtro de Leads:</strong> Analise interações e receba <a href='#' target='_blank'>sugestões automáticas</a>.",
+    "🤖 <strong>Aprendizagem Contínua:</strong> Cada interação melhora automaticamente as campanhas.",
+    "🚀 <strong>Exemplo Real:</strong> Empresa de telecom envia ofertas segmentadas e acompanha tudo pelo CRM.",
+    "💡 <strong>Vantagem:</strong> Automatize todo o funil de vendas e concentre-se apenas em fechar contratos!"
+  ];
+  items.forEach((text,index)=>{
+    const div=document.createElement('div'); div.className='manual-item'; div.innerHTML=text; manual.appendChild(div);
+    setTimeout(()=>{ div.style.opacity=1; }, index*800);
+  });
+}
 </script>
 
 </body>
