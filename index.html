@@ -11,49 +11,67 @@ html, body {
   height:100%;
   font-family:'Helvetica',sans-serif;
   overflow:hidden;
+  background:black;
+  color:#00ffff;
 }
 
-body {
-  position:relative;
-  background:#000;
-}
-
+/* Vídeo de fundo YouTube */
 #video-bg {
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  object-fit:cover;
-  z-index:0;
+  z-index:-2;
+  pointer-events:none;
 }
 
-.overlay {
+/* Overlay da imagem composta com brilho */
+#overlay-img {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  background:url('assets/A_composite_digital_digital_graphic_showcases_six_.png') center/cover no-repeat;
+  opacity:0.65;
+  animation:overlayPulse 5s infinite alternate;
+}
+@keyframes overlayPulse{
+0%{opacity:0.6;}
+100%{opacity:0.8;}
+}
+
+/* Partículas */
+#particles {
   position:absolute;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background: rgba(0,0,0,0.55);
-  z-index:1;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  z-index:0;
 }
 
+/* Box central */
 .login-box {
   position:relative;
-  background:rgba(0,0,0,0.92);
+  background:rgba(0,0,0,0.85);
   padding:30px;
   border-radius:25px;
   text-align:center;
   max-width:600px;
   width:92%;
-  box-shadow:0 0 60px #00ffff;
-  z-index:2;
+  box-shadow:0 0 80px #00ffff;
+  z-index:1;
   display:flex;
   flex-direction:column;
   align-items:center;
+  animation:boxGlow 3s infinite alternate;
+}
+@keyframes boxGlow{
+0%{box-shadow:0 0 40px #00ffff;}
+100%{box-shadow:0 0 80px #00ff88;}
 }
 
 .logo-text {
@@ -64,54 +82,32 @@ body {
   margin-bottom:15px;
   animation:pulseGlow 2s infinite;
 }
-
 @keyframes pulseGlow{
 0%{text-shadow:0 0 10px #00ffff;}
 50%{text-shadow:0 0 30px #00ffff;}
 100%{text-shadow:0 0 10px #00ffff;}
 }
 
+/* Slideshow */
 .slideshow {
   width:100%;
   max-height:300px;
   border-radius:15px;
   overflow:hidden;
   margin-bottom:20px;
-  position:relative;
 }
-
 .slideshow img {
   width:100%;
   display:none;
   border-radius:15px;
   object-fit:cover;
-  position:absolute;
-  top:0;
-  left:0;
+  transition:opacity 1s ease-in-out;
+  opacity:0;
 }
+.slideshow img.active { display:block; opacity:1; }
 
-.slideshow img.active {
-  display:block;
-  animation:fadeSlide 1s ease-in-out;
-}
-
-@keyframes fadeSlide{
-  0% {opacity:0;}
-  100% {opacity:1;}
-}
-
-h1 {
-  color:#00ffff;
-  font-size:1.7rem;
-  margin-bottom:10px;
-  text-align:center;
-}
-
-p {
-  color:#ccc;
-  font-size:0.95rem;
-  text-align:center;
-}
+h1 { font-size:1.7rem; margin-bottom:10px; text-align:center; }
+p { font-size:0.95rem; text-align:center; color:#ccc; }
 
 #rebornaisDesc {
   color:#00ffff;
@@ -119,40 +115,27 @@ p {
   margin:15px 0;
   text-align:center;
   font-size:1rem;
-  text-shadow:0 0 10px #00ffff;
+  text-shadow:0 0 15px #00ffff;
 }
 
 .price-wrapper{
   margin-top:15px;
   width:100%;
 }
-
-.old-price{
-  color:#888;
-  text-decoration:line-through;
-  margin:0;
-}
-
+.old-price{ color:#888; text-decoration:line-through; margin:0; }
 .new-price{
   font-size:2rem;
   color:#00ff88;
   font-weight:bold;
-  text-shadow:0 0 25px #00ff88;
+  text-shadow:0 0 30px #00ff88;
   animation:pricePulse 1.8s infinite;
 }
-
 @keyframes pricePulse{
 0%{transform:scale(1);}
-50%{transform:scale(1.06);}
+50%{transform:scale(1.08);}
 100%{transform:scale(1);}
 }
-
-.limited{
-  color:#ff4444;
-  font-weight:bold;
-  font-size:0.9rem;
-  margin-bottom:5px;
-}
+.limited{ color:#ff4444; font-weight:bold; font-size:0.95rem; margin-bottom:5px; }
 
 input[type="password"]{
   width:100%;
@@ -165,7 +148,6 @@ input[type="password"]{
   color:#fff;
   font-weight:bold;
 }
-
 input::placeholder{ color:rgba(255,255,255,0.7); }
 
 button{
@@ -177,22 +159,33 @@ button{
   font-weight:bold;
   cursor:pointer;
   font-size:1rem;
-  box-shadow:0 0 20px #00ffff;
+  box-shadow:0 0 25px #00ffff;
   animation:breath 2s infinite;
   transition:0.3s;
   margin-bottom:10px;
 }
-
-button:hover{
-  transform:scale(1.05);
-}
-
+button:hover{ transform:scale(1.06); }
 @keyframes breath{
 0%{box-shadow:0 0 15px #00ffff;}
-50%{box-shadow:0 0 40px #00ffff;}
+50%{box-shadow:0 0 50px #00ffff;}
 100%{box-shadow:0 0 15px #00ffff;}
 }
 
+.popup{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:#111;
+  color:#00ffff;
+  padding:12px 18px;
+  border-radius:12px;
+  box-shadow:0 0 20px #00ffff;
+  display:none;
+  font-size:0.85rem;
+  z-index:999;
+}
+
+/* Responsividade */
 @media (max-width:600px){
   .login-box{padding:20px;}
   .logo-text{font-size:1.6rem;}
@@ -203,26 +196,24 @@ button:hover{
   .new-price{font-size:1.6rem;}
   input[type="password"], button{padding:10px; font-size:0.9rem;}
 }
-
-/* Player YouTube oculto */
-#ytplayer {
-  display:none;
-}
 </style>
 </head>
 <body>
 
-<video id="video-bg" autoplay muted loop playsinline>
-  <source src="https://cdn.pixabay.com/vimeo/559626266/pexels-artificial-intelligence-559626266.mp4" type="video/mp4">
-</video>
+<!-- Vídeo de fundo YouTube -->
+<iframe id="video-bg" src="https://www.youtube.com/embed/bO7UM84vCQ4?autoplay=1&mute=1&loop=1&playlist=bO7UM84vCQ4&controls=0&showinfo=0&modestbranding=1&rel=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-<div class="overlay">
+<!-- Overlay da imagem composta -->
+<div id="overlay-img"></div>
+
+<div id="particles"></div>
+
 <div class="login-box">
 
 <div class="logo-text">Reborn AI</div>
 
 <div class="slideshow">
-  <img src="/mnt/data/A_composite_digital_digital_graphic_showcases_six_.png" class="active">
+  <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg" class="active">
   <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg">
   <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg">
 </div>
@@ -231,7 +222,7 @@ button:hover{
 <p>Automatize vendas, gere leads e escale resultados com inteligência.</p>
 
 <div id="rebornaisDesc">
-💡 O Reborn AI permite envio de SMS, WhatsApp e email massivo, criação de sites em segundos, geração automática de ebooks e interação direta com a inteligência de vendas.
+💡 O Reborn AI permite envio de SMS, WhatsApp e email massivo, criação de sites, geração automática de ebooks e interação direta com a inteligência de vendas.
 </div>
 
 <div class="price-wrapper">
@@ -249,34 +240,9 @@ button:hover{
 <button type="submit">Entrar no Reborn AI</button>
 </form>
 
-</div>
-</div>
+<div class="popup" id="popup"></div>
 
-<!-- Player YouTube oculto -->
-<div id="ytplayer"></div>
-<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-let player;
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('ytplayer', {
-    height: '0',
-    width: '0',
-    videoId: 'bO7UM84vCQ4',
-    playerVars: {
-      autoplay: 1,
-      controls: 0,
-      loop: 1,
-      playlist: 'bO7UM84vCQ4',
-      mute: 0,
-      modestbranding: 1,
-      rel: 0
-    },
-    events: {
-      'onReady': function(event){ event.target.playVideo(); }
-    }
-  });
-}
-
 // Slideshow
 let slides = document.querySelectorAll(".slideshow img");
 let current = 0;
@@ -285,6 +251,56 @@ setInterval(()=>{
   current = (current+1)%slides.length;
   slides[current].classList.add("active");
 },4000);
+
+// Popup compras simuladas
+const names=["Carlos","Mariana","Rafael","João","Ana","Miguel","Sofia","Tiago"];
+function showPopup(){
+  let name = names[Math.floor(Math.random()*names.length)];
+  let popup = document.getElementById("popup");
+  popup.innerHTML = "🔥 "+name+" acabou de comprar Reborn AI";
+  popup.style.display = "block";
+  setTimeout(()=>{popup.style.display="none";},4000);
+}
+setInterval(showPopup,7000);
+
+// Partículas coloridas
+const canvas=document.createElement('canvas');
+document.getElementById('particles').appendChild(canvas);
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+});
+let particles=[];
+for(let i=0;i<100;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2+1,
+    dx:(Math.random()-0.5)*1,
+    dy:(Math.random()-0.5)*1,
+    color: `hsl(${Math.random()*360}, 100%, 50%)`
+  });
+}
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.color;
+    ctx.fill();
+    p.x+=p.dx;
+    p.y+=p.dy;
+    if(p.x<0)p.x=canvas.width;
+    if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height;
+    if(p.y>canvas.height)p.y=0;
+  });
+  requestAnimationFrame(draw);
+}
+draw();
 
 // Login senha
 document.getElementById('loginForm').addEventListener('submit', function(e){
