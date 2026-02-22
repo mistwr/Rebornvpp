@@ -8,15 +8,12 @@
   body { margin:0; font-family: Arial, sans-serif; background:#111; color:#eee; }
   header { text-align:center; padding:40px 20px; }
   header h1 { font-size:2.5rem; margin-bottom:10px; }
+  header img { width:150px; margin-bottom:20px; }
   header p { font-size:1.2rem; max-width:600px; margin:auto; }
   main { max-width:1200px; margin:auto; padding:20px; }
-  .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin:40px 0; }
-  .feature { background:#222; padding:20px; border-radius:12px; transition:0.3s; }
-  .feature:hover { background:#333; transform:scale(1.05); }
-  .feature h3 { margin-bottom:10px; }
-  .slideshow { display:flex; overflow:hidden; gap:10px; margin:40px 0; justify-content:center; }
+  .slideshow { position:relative; display:flex; overflow:hidden; gap:10px; margin:40px 0; justify-content:center; }
   .slideshow img { width:100%; max-width:350px; height:220px; object-fit:cover; border-radius:12px; flex-shrink:0; transition: transform 1s ease, opacity 1s ease; opacity:0; transform:translateY(20px); }
-  .caption { text-align:center; font-size:1.2rem; margin:10px 0; height:2rem; opacity:0; transition:opacity 0.5s; }
+  .caption { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.7); padding:10px 20px; border-radius:8px; font-size:1.2rem; opacity:0; transition:opacity 0.5s; }
   .quiz { margin:40px 0; text-align:center; }
   .quiz button { display:block; margin:10px auto; padding:15px 25px; border:none; border-radius:8px; background:#0a74da; color:white; cursor:pointer; font-size:1rem; transition:0.3s; width:80%; max-width:300px; }
   .quiz button:hover { background:#065bb5; transform:scale(1.05); }
@@ -30,48 +27,40 @@
 <body>
 
 <header>
+  <img src="Logoreborn.png" alt="Reborn AI Logo">
   <h1>Reborn AI</h1>
-  <p>O teu assistente de inteligência artificial multifuncional. Chat, Live, WebCraft, SMS, Email, WhatsApp, Clipper, Marketing, Slides e Ebooks — tudo num só lugar para maximizar produtividade e resultados.</p>
+  <p>O teu assistente de inteligência artificial multifuncional. Criação de sites, envio de SMS, Emails, WhatsApp, Marketing digital, Slides e Ebooks — tudo num só lugar.</p>
 </header>
 
 <!-- Música de fundo -->
 <audio autoplay loop controls>
-  <source src="Sem título (22).mp3" type="audio/mpeg">
+  <source src="Music reborninstru.mp3" type="audio/mpeg">
   O seu navegador não suporta o elemento de áudio.
 </audio>
 
 <main>
-  <!-- Features / O que é -->
-  <div class="features">
-    <div class="feature"><h3>Chat Inteligente</h3><p>Converse naturalmente, com análise de imagens, voz e pesquisa web em tempo real.</p></div>
-    <div class="feature"><h3>WebCraft</h3><p>Crie websites completos com templates personalizáveis e exportação fácil.</p></div>
-    <div class="feature"><h3>Marketing Digital</h3><p>Posts automáticos, legendas com hashtags e integração com redes sociais.</p></div>
-    <div class="feature"><h3>SMS / Email / WhatsApp</h3><p>Envio em massa, validação automática e criação de QR Codes rápidos.</p></div>
-    <div class="feature"><h3>Slides & Ebooks</h3><p>Criação de apresentações e ebooks prontos para download em HTML.</p></div>
-    <div class="feature"><h3>Modo Live</h3><p>Use a câmara e microfone para interação em tempo real com respostas narradas.</p></div>
-  </div>
-
-  <!-- Slideshow visual com imagens reais -->
+  <!-- Slideshow -->
   <div class="slideshow" id="slideshow">
-    <img src="https://i.imgur.com/1f8wH0y.png" alt="Chat Inteligente">
-    <img src="https://i.imgur.com/Lt4gF7k.png" alt="WebCraft">
-    <img src="https://i.imgur.com/3aV5Zq9.png" alt="Marketing Digital">
-    <img src="https://i.imgur.com/xV1xJsD.png" alt="SMS / Email / WhatsApp">
-    <img src="https://i.imgur.com/Bq6MfEi.png" alt="Slides & Ebooks">
-    <img src="https://i.imgur.com/2mCkP8A.png" alt="Modo Live">
-  </div>
-  <div class="caption" id="caption"></div>
-
-  <!-- Quiz opcional -->
-  <div class="quiz">
-    <h2>Teste o teu conhecimento sobre Reborn AI</h2>
-    <button onclick="checkAnswer(this,true,'O Reborn AI permite enviar SMS em massa.')">O Reborn AI permite enviar SMS em massa?</button>
-    <button onclick="checkAnswer(this,true,'O Reborn AI pode criar websites.')">O Reborn AI pode criar websites?</button>
-    <button onclick="checkAnswer(this,true,'O Reborn AI tem integração com WhatsApp e Email.')">O Reborn AI tem integração com WhatsApp e Email?</button>
+    <img src="Webcraft.png" alt="WebCraft">
+    <img src="Sms e Whatsapp.png" alt="SMS e WhatsApp">
+    <img src="Ebooks.png" alt="Ebooks">
+    <img src="Email.png" alt="Email">
+    <img src="Marketing.png" alt="Marketing Digital">
+    <img src="Leads e SMS.png" alt="Leads e SMS">
+    <div class="caption" id="caption"></div>
   </div>
 
-  <!-- Botão Stripe -->
-  <div class="cta">
+  <!-- Quiz interativo opcional -->
+  <div class="quiz" id="quiz">
+    <h2>Teste rápido Reborn AI</h2>
+    <p>Responda às perguntas por diversão e conheça melhor o Reborn AI!</p>
+    <button onclick="answer(this,true)">O Reborn AI pode criar websites?</button>
+    <button onclick="answer(this,true)">O Reborn AI envia SMS e Emails?</button>
+    <button onclick="answer(this,true)">O Reborn AI possui Modo Live?</button>
+  </div>
+
+  <!-- Botão Stripe sempre visível -->
+  <div class="cta" id="cta">
     <button onclick="window.open('https://checkout.stripe.com/pay/...','_blank')">Comprar Reborn AI</button>
   </div>
 </main>
@@ -81,32 +70,39 @@
 </footer>
 
 <script>
-  // Slideshow automático
+  // Slideshow com legendas animadas
   const slides = document.querySelectorAll('#slideshow img');
   const captions = [
-    "Maximize produtividade com Chat Inteligente.",
-    "Crie sites impressionantes com WebCraft.",
-    "Marketing Digital automatizado e eficiente.",
-    "Envio em massa via SMS, Email e WhatsApp.",
-    "Slides e Ebooks prontos para download.",
-    "Modo Live para interação em tempo real."
+    "Crie websites completos em segundos com WebCraft.",
+    "Envie mensagens em massa via SMS e WhatsApp.",
+    "Transforme ideias em ebooks prontos para download.",
+    "Campanhas de email automatizadas, fáceis e rápidas.",
+    "Marketing digital poderoso com poucos cliques.",
+    "Gestão completa de leads e campanhas SMS."
   ];
-  let current = 0;
+  let current=0;
   function nextSlide(){
-    slides.forEach((img,i)=>{
-      img.style.opacity=0; img.style.transform='translateY(20px)';
+    slides.forEach((img,i)=>{ 
+      img.style.opacity=0; 
+      img.style.transform='translateY(20px)'; 
     });
     slides[current].style.opacity=1;
     slides[current].style.transform='translateY(0)';
-    document.getElementById('caption').textContent = captions[current];
-    current = (current+1)%slides.length;
+    const captionEl = document.getElementById('caption');
+    captionEl.style.opacity = 0;
+    setTimeout(()=>{ 
+      captionEl.textContent = captions[current]; 
+      captionEl.style.opacity = 1; 
+    }, 500);
+    current=(current+1)%slides.length;
   }
-  if(slides.length>0) { nextSlide(); setInterval(nextSlide,5000); }
+  if(slides.length>0){ nextSlide(); setInterval(nextSlide,5000); }
 
-  // Quiz feedback
-  function checkAnswer(btn, correct, text){
+  // Quiz interativo
+  function answer(btn, correct){
     if(correct){ btn.style.background='green'; btn.textContent='✅ Correto!'; }
     else { btn.style.background='red'; btn.textContent='❌ Errado!'; }
+    btn.disabled=true;
   }
 </script>
 
