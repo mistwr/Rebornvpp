@@ -5,276 +5,74 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reborn AI - Potencialize Suas Vendas</title>
 <style>
-html, body {
-  margin:0;
-  padding:0;
-  height:100%;
-  font-family:'Helvetica',sans-serif;
-  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  overflow-x:hidden;
-}
+html, body {margin:0; padding:0; font-family:'Helvetica',sans-serif; background:#0f2027; scroll-behavior:smooth; overflow-x:hidden;}
+body {display:flex; justify-content:center; padding:20px 10px;}
+#particles {position:fixed; top:0; left:0; width:100%; height:100%; z-index:0;}
 
-body {
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  padding-top:40px;
-}
+/* Container principal */
+.container {position:relative; background:rgba(0,0,0,0.95); padding:30px; border-radius:20px; max-width:900px; width:100%; box-shadow:0 0 60px #00ffff; z-index:1; opacity:0; animation:fadeIn 1s forwards;}
+@keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
 
-#particles {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:0;
-}
+/* Logo */
+.logo-text {font-size:2.4rem; font-weight:bold; color:#00ffff; text-align:center; margin-bottom:20px; text-shadow:0 0 15px #00ffff,0 0 40px #00ffff; animation:pulseGlow 2s infinite;}
+@keyframes pulseGlow{0%{text-shadow:0 0 10px #00ffff;}50%{text-shadow:0 0 30px #00ffff;}100%{text-shadow:0 0 10px #00ffff;}}
 
-.container {
-  position:relative;
-  background:rgba(0,0,0,0.92);
-  padding:30px;
-  border-radius:20px;
-  max-width:800px;
-  width:95%;
-  box-shadow:0 0 60px #00ffff;
-  z-index:1;
-  animation:fadeIn 1s ease;
-}
+/* Slideshow */
+.slideshow {width:100%; max-height:300px; border-radius:15px; overflow:hidden; margin-bottom:20px; position:relative;}
+.slideshow img {width:100%; position:absolute; top:0; left:0; opacity:0; border-radius:15px; object-fit:cover; transition:opacity 1.2s ease-in-out;}
+.slideshow img.active {opacity:1; z-index:1;}
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
+/* Texto principal */
+h1 {color:#00ffff; font-size:2rem; margin-bottom:10px; text-align:center;}
+p,#rebornaisDesc {color:#ccc; font-size:1rem; text-align:center; margin-bottom:15px;}
+#rebornaisDesc {color:#00ffff; font-weight:bold; text-shadow:0 0 10px #00ffff; opacity:0; transform:translateY(20px); transition:all 1s ease;}
 
-.logo-text {
-  font-size:2rem;
-  font-weight:bold;
-  color:#00ffff;
-  text-shadow:0 0 15px #00ffff,0 0 40px #00ffff;
-  text-align:center;
-  margin-bottom:20px;
-  animation:pulseGlow 2s infinite;
-}
+/* Benefícios sequenciais */
+.benefit {background: rgba(0,0,0,0.2); padding:15px; border-radius:12px; margin-bottom:15px; color:#fff; opacity:0; transform:translateY(20px); transition:all 1s ease; display:flex; align-items:center;}
+.benefit-icon {width:40px; height:40px; margin-right:12px;}
+.benefit.show {opacity:1; transform:translateY(0);}
+.benefit h3 {margin:0; color:#00ffff; font-size:1.2rem;}
 
-@keyframes pulseGlow{
-0%{text-shadow:0 0 10px #00ffff;}
-50%{text-shadow:0 0 30px #00ffff;}
-100%{text-shadow:0 0 10px #00ffff;}
-}
+/* Preço */
+.price-wrapper{text-align:center; margin:15px 0; opacity:0; transform:translateY(20px); transition:all 1s ease;}
+.old-price{color:#888; text-decoration:line-through;}
+.new-price{font-size:2.2rem; color:#00ff88; font-weight:bold; text-shadow:0 0 25px #00ff88; animation:pricePulse 1.8s infinite;}
+@keyframes pricePulse{0%{transform:scale(1);}50%{transform:scale(1.06);}100%{transform:scale(1);}}
+.limited{color:#ff4444; font-weight:bold; font-size:0.95rem; margin-bottom:5px;}
 
-.slideshow {
-  width:100%;
-  max-height:250px;
-  border-radius:15px;
-  overflow:hidden;
-  margin-bottom:20px;
-  position:relative;
-}
-
-.slideshow img {
-  width:100%;
-  position:absolute;
-  top:0;
-  left:0;
-  opacity:0;
-  border-radius:15px;
-  object-fit:cover;
-  transition:opacity 1.2s ease-in-out;
-}
-
-.slideshow img.active {
-  opacity:1;
-  z-index:1;
-}
-
-h1 {
-  color:#00ffff;
-  font-size:1.7rem;
-  margin-bottom:10px;
-  text-align:center;
-  opacity:0;
-  animation:fadeInText 1s forwards;
-  animation-delay:1s;
-}
-
-@keyframes fadeInText{
-  to{opacity:1;}
-}
-
-p, #rebornaisDesc {
-  color:#ccc;
-  font-size:1rem;
-  text-align:center;
-  margin-bottom:15px;
-  opacity:0;
-  animation:fadeInText 1s forwards;
-  animation-delay:1.5s;
-}
-
-#rebornaisDesc{
-  color:#00ffff;
-  font-weight:bold;
-  text-shadow:0 0 10px #00ffff;
-}
-
-.price-wrapper{
-  margin-top:15px;
-  width:100%;
-  text-align:center;
-  opacity:0;
-  animation:fadeInText 1s forwards;
-  animation-delay:2s;
-}
-
-.old-price{
-  color:#888;
-  text-decoration:line-through;
-  margin:0;
-}
-
-.new-price{
-  font-size:2rem;
-  color:#00ff88;
-  font-weight:bold;
-  text-shadow:0 0 25px #00ff88;
-  animation:pricePulse 1.8s infinite;
-}
-
-@keyframes pricePulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.06);}
-100%{transform:scale(1);}
-}
-
-.limited{
-  color:#ff4444;
-  font-weight:bold;
-  font-size:0.9rem;
-  margin-bottom:5px;
-}
-
-input[type="password"]{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:none;
-  margin-bottom:10px;
-  text-align:center;
-  background: rgba(255,255,255,0.1);
-  color:#fff;
-  font-weight:bold;
-}
-
-input::placeholder{ color:rgba(255,255,255,0.7); }
-
-button{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:linear-gradient(45deg,#00ffff,#0099ff);
-  font-weight:bold;
-  cursor:pointer;
-  font-size:1rem;
-  box-shadow:0 0 20px #00ffff;
-  animation:breath 2s infinite;
-  transition:0.3s;
-  margin-bottom:10px;
-}
-
-button:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 30px #00ffff,0 0 50px #00ffff inset;
-}
-
-button.quiz-btn{
-  background:linear-gradient(90deg,#0099ff,#00ffff);
-  transition:0.4s;
-}
-
-button.quiz-btn:hover{
-  background:linear-gradient(90deg,#00ff88,#00ffff);
-  transform:scale(1.03);
-}
-
-@keyframes breath{
-0%{box-shadow:0 0 15px #00ffff;}
-50%{box-shadow:0 0 40px #00ffff;}
-100%{box-shadow:0 0 15px #00ffff;}
-}
-
-.popup{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  background:#111;
-  color:#00ffff;
-  padding:12px 18px;
-  border-radius:12px;
-  box-shadow:0 0 20px #00ffff;
-  display:none;
-  font-size:0.85rem;
-  z-index:999;
-  animation:popupAnim 0.5s ease;
-}
-
-@keyframes popupAnim{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
+/* Inputs e botões */
+input[type="password"]{width:100%; padding:12px; border-radius:10px; border:none; margin-bottom:10px; text-align:center; background: rgba(255,255,255,0.1); color:#fff; font-weight:bold;}
+input::placeholder{color:rgba(255,255,255,0.7);}
+button{width:100%; padding:14px; border:none; border-radius:12px; font-weight:bold; cursor:pointer; font-size:1rem; transition:0.3s; margin-bottom:10px; box-shadow:0 0 20px #00ffff;}
+button:hover{transform:scale(1.05);}
 
 /* Quiz */
-.quiz {
-  margin:25px 0;
-  text-align:left;
-  color:#fff;
-  background: rgba(0,0,0,0.2);
-  padding:15px;
-  border-radius:12px;
-  box-shadow:0 0 20px #00ffff;
-  opacity:0;
-  animation:fadeInText 1s forwards;
-  animation-delay:2.5s;
-}
+.quiz {margin:25px 0; text-align:left; color:#fff; background: rgba(0,0,0,0.2); padding:15px; border-radius:12px; box-shadow:0 0 20px #00ffff; opacity:0; transform:translateY(20px); transition:all 1s ease;}
+.quiz h2{color:#00ffff; text-align:center; margin-bottom:10px;}
+button.quiz-btn{margin-top:5px; width:100%; text-align:left; cursor:pointer; transition:0.3s; background:linear-gradient(90deg,#0099ff,#00ffff); border-radius:8px; padding:10px; color:#fff; font-weight:bold; box-shadow:0 0 15px #00ffff;}
+button.quiz-btn:hover{background:linear-gradient(90deg,#00ff88,#00ffff); transform:scale(1.03);}
 
-.quiz h2{
-  color:#00ffff;
-  text-align:center;
-  margin-bottom:10px;
-}
+/* Vídeo promocional */
+#promoVideo{display:block; margin:20px auto; border-radius:12px; box-shadow:0 0 25px #00ffff; max-width:100%; height:auto; opacity:0; transform:translateY(20px); transition:all 1s ease;}
 
-.quiz button{
-  margin-top:5px;
-  width:100%;
-  text-align:left;
-  cursor:pointer;
-  transition:0.3s;
-}
+/* Popup vendas simuladas */
+.popup{position:fixed; bottom:20px; left:20px; background:#111; color:#00ffff; padding:12px 18px; border-radius:12px; box-shadow:0 0 20px #00ffff; display:none; font-size:0.85rem; z-index:999; animation:popupAnim 0.5s ease;}
+@keyframes popupAnim{from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);}}
 
-/* Video Promo */
-#promoVideo{
-  display:block;
-  margin:15px auto;
-  border-radius:12px;
-  box-shadow:0 0 25px #00ffff;
-  max-width:100%;
-  height:auto;
-  opacity:0;
-  animation:fadeInText 1s forwards;
-  animation-delay:1.8s;
-}
+/* Scroll animations */
+.scroll-animate {opacity:0; transform:translateY(20px); transition:all 1s ease;}
+.scroll-animate.show {opacity:1; transform:translateY(0);}
 
 /* Responsividade */
 @media (max-width:800px){
   .container{padding:20px;}
-  .logo-text{font-size:1.6rem;}
-  h1{font-size:1.4rem;}
+  .logo-text{font-size:1.8rem;}
+  h1{font-size:1.6rem;}
   p,#rebornaisDesc{font-size:0.95rem;}
-  .slideshow{max-height:180px;}
-  .slideshow img{max-height:180px;}
-  .new-price{font-size:1.6rem;}
-  input[type="password"], button{padding:10px; font-size:0.9rem;}
+  .slideshow{max-height:200px;}
+  .slideshow img{max-height:200px;}
+  .new-price{font-size:1.8rem;}
+  input[type="password"], button{padding:10px; font-size:0.95rem;}
   #promoVideo{width:100%; height:220px;}
 }
 </style>
@@ -296,13 +94,20 @@ button.quiz-btn:hover{
 <h1>Hora de Vender 🚀</h1>
 <p>Automatize vendas, gere leads e escale resultados com inteligência artificial.</p>
 
+<!-- Vídeo promocional -->
 <iframe id="promoVideo" width="640" height="360" src="https://www.youtube.com/embed/bO7UM84vCQ4?autoplay=1&mute=0&loop=1&playlist=bO7UM84vCQ4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<div id="rebornaisDesc">
+<div id="rebornaisDesc" class="scroll-animate">
 💡 O Reborn AI permite envio de SMS, WhatsApp e email massivo, criação de sites em segundos, geração automática de ebooks e interação direta com a inteligência de vendas.
 </div>
 
-<div class="price-wrapper">
+<!-- Benefícios -->
+<div class="benefit scroll-animate"><img class="benefit-icon" src="https://img.icons8.com/ios-filled/50/00ffff/sms.png"><h3>Envio de SMS, WhatsApp e Email massivo</h3></div>
+<div class="benefit scroll-animate"><img class="benefit-icon" src="https://img.icons8.com/ios-filled/50/00ffff/website.png"><h3>Criação de sites em segundos</h3></div>
+<div class="benefit scroll-animate"><img class="benefit-icon" src="https://img.icons8.com/ios-filled/50/00ffff/book.png"><h3>Geração automática de ebooks</h3></div>
+<div class="benefit scroll-animate"><img class="benefit-icon" src="https://img.icons8.com/ios-filled/50/00ffff/artificial-intelligence.png"><h3>Interação direta com IA</h3></div>
+
+<div class="price-wrapper scroll-animate">
 <p class="old-price">Antes 69,99€</p>
 <div class="new-price">Agora 9,99€</div>
 <div class="limited">🔥 Oferta limitada</div>
@@ -311,14 +116,15 @@ button.quiz-btn:hover{
 </a>
 </div>
 
-<form id="loginForm">
+<form id="loginForm" class="scroll-animate">
 <input type="password" id="password" placeholder="Password" required>
 <button type="submit">Entrar no Reborn AI</button>
 </form>
 
 <div class="popup" id="popup"></div>
 
-<div class="quiz">
+<!-- Quiz interativo -->
+<div class="quiz scroll-animate">
 <h2>Descubra como o Reborn AI pode aumentar suas vendas!</h2>
 <p>1. Qual ferramenta do Reborn AI ajuda a automatizar o envio de mensagens? </p>
 <button class="quiz-btn" onclick="alert('Resposta certa: SMS, WhatsApp e Email massivo!')">A) Somente SMS</button>
@@ -332,72 +138,29 @@ button.quiz-btn:hover{
 </div>
 
 <script>
-// Slideshow com fade
-let slides = document.querySelectorAll(".slideshow img");
-let current = 0;
-setInterval(()=>{
-  slides[current].classList.remove("active");
-  current = (current+1)%slides.length;
-  slides[current].classList.add("active");
-},4000);
+// Slideshow fade
+let slides=document.querySelectorAll(".slideshow img");let current=0;
+setInterval(()=>{slides[current].classList.remove("active");current=(current+1)%slides.length;slides[current].classList.add("active");},4000);
 
-// Popup compras simuladas
+// Popup vendas simuladas
 const names=["Carlos","Mariana","Rafael","João","Ana","Miguel","Sofia","Tiago"];
-function showPopup(){
-  let name = names[Math.floor(Math.random()*names.length)];
-  let popup = document.getElementById("popup");
-  popup.innerHTML = "🔥 "+name+" acabou de comprar Reborn AI";
-  popup.style.display = "block";
-  setTimeout(()=>{popup.style.display="none";},4000);
-}
+function showPopup(){let name=names[Math.floor(Math.random()*names.length)];let popup=document.getElementById("popup");popup.innerHTML="🔥 "+name+" acabou de comprar Reborn AI";popup.style.display="block";setTimeout(()=>{popup.style.display="none";},4000);}
 setInterval(showPopup,7000);
 
 // Partículas
-const canvas=document.createElement('canvas');
-document.getElementById('particles').appendChild(canvas);
-const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-window.addEventListener('resize',()=>{
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight;
-});
-let particles=[];
-for(let i=0;i<80;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*2+1,
-    dx:(Math.random()-0.5)*0.5,
-    dy:(Math.random()-0.5)*0.5
-  });
-}
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="#00ffff";
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
-    p.x+=p.dx;
-    p.y+=p.dy;
-    if(p.x<0)p.x=canvas.width;
-    if(p.x>canvas.width)p.x=0;
-    if(p.y<0)p.y=canvas.height)p.y=0;
-  });
-  requestAnimationFrame(draw);
-}
-draw();
+const canvas=document.createElement('canvas');document.getElementById('particles').appendChild(canvas);const ctx=canvas.getContext('2d');canvas.width=window.innerWidth;canvas.height=window.innerHeight;window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});let particles=[];for(let i=0;i<80;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-0.5)*0.5,dy:(Math.random()-0.5)*0.5});}function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle="#00ffff";particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;});requestAnimationFrame(draw);}draw();
+
+// Scroll animations
+function onScrollAnimation(){let elements=document.querySelectorAll('.scroll-animate');let windowBottom=window.innerHeight*0.9;elements.forEach(el=>{let elTop=el.getBoundingClientRect().top;if(elTop<windowBottom){el.classList.add('show');}});}
+window.addEventListener('scroll', onScrollAnimation);
+onScrollAnimation();
 
 // Login password
 document.getElementById('loginForm').addEventListener('submit', function(e){
   e.preventDefault();
-  const pwd = document.getElementById('password').value.trim();
-  if(pwd !== 'reborn'){
-    alert('Password incorreta!');
-    return;
-  }
-  window.location.href = 'https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
+  const pwd=document.getElementById('password').value.trim();
+  if(pwd!=='reborn'){alert('Password incorreta!');return;}
+  window.location.href='https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
 });
 </script>
 
