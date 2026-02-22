@@ -11,59 +11,56 @@ html, body {
   height:100%;
   font-family:'Helvetica',sans-serif;
   overflow-x:hidden;
-  background:#000;
 }
 
 body {
+  background:#000;
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  flex-direction:column;
   position:relative;
-  color:#fff;
+  padding-top:20px;
 }
 
-/* Vídeo de fundo */
-#bgVideo {
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  object-fit:cover;
+/* YouTube background */
+#player {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
   z-index:-1;
-}
-
-/* Slideshow */
-.slideshow {
-  width:90%;
-  max-width:700px;
-  margin:20px auto;
-  border-radius:15px;
-  overflow:hidden;
-}
-
-.slideshow img {
-  width:100%;
-  display:none;
-  border-radius:15px;
+  pointer-events:none;
   object-fit:cover;
 }
 
-.slideshow img.active {
-  display:block;
+/* Partículas */
+#particles {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:0;
 }
 
-/* Caixa principal */
+/* Conteúdo principal */
 .login-box {
-  background:rgba(0,0,0,0.85);
-  padding:25px;
-  border-radius:25px;
-  text-align:center;
-  max-width:600px;
-  width:90%;
-  margin:auto;
-  box-shadow:0 0 50px #00ffff;
+  position: relative;
+  background: rgba(0,0,0,0.85);
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  max-width: 600px;
+  width: 92%;
+  box-shadow: 0 0 60px #00ffff;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
+/* Logo */
 .logo-text {
   font-size:2rem;
   font-weight:bold;
@@ -79,19 +76,61 @@ body {
 100%{text-shadow:0 0 10px #00ffff;}
 }
 
-h1 { color:#00ffff; margin-bottom:10px; }
-p { color:#ccc; font-size:0.95rem; margin-bottom:15px; }
+/* Slideshow */
+.slideshow {
+  width:100%;
+  max-height:250px;
+  border-radius:15px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+
+.slideshow img {
+  width:100%;
+  display:none;
+  border-radius:15px;
+  object-fit:cover;
+}
+
+.slideshow img.active {
+  display:block;
+}
+
+/* Títulos e textos */
+h1 {
+  color:#00ffff;
+  font-size:1.7rem;
+  margin-bottom:10px;
+  text-align:center;
+}
+
+p {
+  color:#ccc;
+  font-size:0.95rem;
+  text-align:center;
+}
 
 #rebornaisDesc {
-  color:#00ffff; font-weight:bold; margin:15px 0; font-size:1rem; text-shadow:0 0 10px #00ffff;
+  color:#00ffff;
+  font-weight:bold;
+  margin:15px 0;
+  text-align:center;
+  font-size:1rem;
+  text-shadow:0 0 10px #00ffff;
 }
 
-/* Preços */
+/* Preço */
 .price-wrapper{
   margin-top:15px;
+  width:100%;
 }
 
-.old-price{ color:#888; text-decoration:line-through; }
+.old-price{
+  color:#888;
+  text-decoration:line-through;
+  margin:0;
+}
+
 .new-price{
   font-size:2rem;
   color:#00ff88;
@@ -99,14 +138,21 @@ p { color:#ccc; font-size:0.95rem; margin-bottom:15px; }
   text-shadow:0 0 25px #00ff88;
   animation:pricePulse 1.8s infinite;
 }
+
 @keyframes pricePulse{
 0%{transform:scale(1);}
 50%{transform:scale(1.06);}
 100%{transform:scale(1);}
 }
-.limited{ color:#ff4444; font-weight:bold; font-size:0.9rem; margin-bottom:5px; }
 
-/* Formulário password */
+.limited{
+  color:#ff4444;
+  font-weight:bold;
+  font-size:0.9rem;
+  margin-bottom:5px;
+}
+
+/* Formulário */
 input[type="password"]{
   width:100%;
   padding:12px;
@@ -118,7 +164,9 @@ input[type="password"]{
   color:#fff;
   font-weight:bold;
 }
+
 input::placeholder{ color:rgba(255,255,255,0.7); }
+
 button{
   width:100%;
   padding:14px;
@@ -133,37 +181,45 @@ button{
   transition:0.3s;
   margin-bottom:10px;
 }
-button:hover{ transform:scale(1.05); }
+
+button:hover{
+  transform:scale(1.05);
+}
+
 @keyframes breath{
 0%{box-shadow:0 0 15px #00ffff;}
 50%{box-shadow:0 0 40px #00ffff;}
 100%{box-shadow:0 0 15px #00ffff;}
 }
 
-/* Popup compras simuladas */
-.popup{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  background:#111;
-  color:#00ffff;
-  padding:12px 18px;
-  border-radius:12px;
-  box-shadow:0 0 20px #00ffff;
-  display:none;
-  font-size:0.85rem;
-  z-index:999;
+/* Quiz */
+.quiz-container{
+  background:rgba(0,0,0,0.8);
+  border-radius:15px;
+  padding:20px;
+  margin-top:20px;
+  text-align:left;
+  width:100%;
 }
 
-/* Quiz */
-.quiz-box{ background:rgba(0,0,0,0.85); padding:20px; margin:20px auto; border-radius:15px; max-width:600px;}
-.quiz-box button{ margin:8px 5px; background:#00ffff; color:#000; font-weight:bold; cursor:pointer; }
-.quiz-desc{ font-size:0.95rem; font-weight:bold; }
+.quiz-container h2{
+  color:#00ffff;
+  margin-bottom:10px;
+}
+
+.quiz-container button{
+  margin-top:10px;
+}
 
 /* Responsividade */
-@media(max-width:600px){
-  .slideshow{max-height:200px;}
-  .slideshow img{max-height:200px;}
+@media (max-width:600px){
+  .login-box{padding:20px;}
+  .logo-text{font-size:1.6rem;}
+  h1{font-size:1.4rem;}
+  #rebornaisDesc{font-size:0.9rem;}
+  p{font-size:0.85rem;}
+  .slideshow{max-height:180px;}
+  .slideshow img{max-height:180px;}
   .new-price{font-size:1.6rem;}
   input[type="password"], button{padding:10px; font-size:0.9rem;}
 }
@@ -171,52 +227,77 @@ button:hover{ transform:scale(1.05); }
 </head>
 <body>
 
-<!-- Video de fundo do YouTube -->
-<iframe id="bgVideo" src="https://www.youtube.com/embed/bO7UM84vCQ4?autoplay=1&mute=0&loop=1&playlist=bO7UM84vCQ4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div id="player"></div>
+<div id="particles"></div>
 
 <div class="login-box">
-  <div class="logo-text">Reborn AI</div>
 
-  <!-- Slideshow de imagens -->
-  <div class="slideshow">
-    <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg" class="active">
-    <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg">
-    <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg">
-  </div>
+<div class="logo-text">Reborn AI</div>
 
-  <h1>Hora de Vender 🚀</h1>
-  <p>Automatize vendas, gere leads e escale resultados com inteligência.</p>
-
-  <div id="rebornaisDesc">
-  💡 O Reborn AI permite envio de SMS, WhatsApp e email massivo, criação de sites, ebooks e interação direta com vendas.
-  </div>
-
-  <div class="price-wrapper">
-    <p class="old-price">Antes 69,99€</p>
-    <div class="new-price">Agora 9,99€</div>
-    <div class="limited">🔥 Oferta limitada</div>
-    <a href="https://buy.stripe.com/eVqdR93RbaHQ4ecbk95Rm00" target="_blank">
-      <button>🛒 Garantir Acesso Agora</button>
-    </a>
-  </div>
-
-  <form id="loginForm">
-    <input type="password" id="password" placeholder="Password" required>
-    <button type="submit">Entrar no Reborn AI</button>
-  </form>
-
+<div class="slideshow">
+  <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg" class="active">
+  <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg">
+  <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg">
 </div>
 
-<!-- Quiz -->
-<div class="quiz-box" id="quizBox">
-  <div class="quiz-question" id="quizQuestion"></div>
-  <div class="quiz-options" id="quizOptions"></div>
-  <div class="quiz-desc" id="quizDesc" style="opacity:0; transition:opacity 0.7s;"></div>
+<h1>Hora de Vender 🚀</h1>
+<p>Automatize vendas, gere leads e escale resultados com inteligência.</p>
+
+<div id="rebornaisDesc">
+💡 O Reborn AI permite envio de SMS, WhatsApp e email massivo, criação de sites em segundos, geração automática de ebooks e interação direta com a inteligência de vendas.
 </div>
 
-<div class="popup" id="popup"></div>
+<div class="price-wrapper">
+<p class="old-price">Antes 69,99€</p>
+<div class="new-price">Agora 9,99€</div>
+<div class="limited">🔥 Oferta limitada</div>
+<a href="https://buy.stripe.com/eVqdR93RbaHQ4ecbk95Rm00" target="_blank">
+<button>🛒 Garantir Acesso Agora</button>
+</a>
+</div>
 
+<form id="loginForm">
+<input type="password" id="password" placeholder="Password" required>
+<button type="submit">Entrar no Reborn AI</button>
+</form>
+
+<div class="quiz-container" id="quizContainer">
+<h2>Teste Rápido: Descubra o Reborn AI</h2>
+<p id="quizQuestion">Qual é a principal vantagem de usar o Reborn AI?</p>
+<button onclick="checkAnswer('a')">a) Automatiza vendas e comunicação</button>
+<button onclick="checkAnswer('b')">b) Apenas envia emails</button>
+<button onclick="checkAnswer('c')">c) Cria imagens apenas</button>
+<p id="quizFeedback" style="color:#00ff88;font-weight:bold;margin-top:10px;"></p>
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
+// YouTube API
+let player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    videoId: 'bO7UM84vCQ4', // Shorts ID
+    width: '100%',
+    height: '100%',
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+      mute: 0,
+      loop: 1,
+      playlist: 'bO7UM84vCQ4',
+      modestbranding: 1,
+      rel: 0,
+      showinfo: 0
+    },
+    events: {
+      onReady: (e) => {
+        e.target.setVolume(60);
+        e.target.playVideo();
+      }
+    }
+  });
+}
+
 // Slideshow
 let slides = document.querySelectorAll(".slideshow img");
 let current = 0;
@@ -226,18 +307,45 @@ setInterval(()=>{
   slides[current].classList.add("active");
 },4000);
 
-// Popup compras simuladas
-const names=["Carlos","Mariana","Rafael","João","Ana","Miguel","Sofia","Tiago"];
-function showPopup(){
-  let name = names[Math.floor(Math.random()*names.length)];
-  let popup = document.getElementById("popup");
-  popup.innerHTML = "🔥 "+name+" acabou de comprar Reborn AI";
-  popup.style.display = "block";
-  setTimeout(()=>{popup.style.display="none";},4000);
+// Partículas
+const canvas=document.createElement('canvas');
+document.getElementById('particles').appendChild(canvas);
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+});
+let particles=[];
+for(let i=0;i<80;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2+1,
+    dx:(Math.random()-0.5)*0.5,
+    dy:(Math.random()-0.5)*0.5
+  });
 }
-setInterval(showPopup,7000);
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#00ffff";
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+    p.x+=p.dx;
+    p.y+=p.dy;
+    if(p.x<0)p.x=canvas.width;
+    if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height;
+    if(p.y>canvas.height)p.y=0;
+  });
+  requestAnimationFrame(draw);
+}
+draw();
 
-// Login password
+// Password
 document.getElementById('loginForm').addEventListener('submit', function(e){
   e.preventDefault();
   const pwd = document.getElementById('password').value.trim();
@@ -248,45 +356,16 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
   window.location.href = 'https://v0-crm-web-app-snowy.vercel.app/login';
 });
 
-// Quiz interativo
-const questions = [
-  {q:"Qual destas funcionalidades do Reborn AI ajuda a aumentar a produtividade?", a:["Envio de SMS massivo","Somente design de logotipo","Automação de emails e WhatsApp","Nada disso"], correct:[0,2], desc:"💡 Vantagem: Automatize comunicações e foque nas vendas."},
-  {q:"Qual funcionalidade permite criar ebooks automaticamente?", a:["Sim","Não","Talvez","Nunca"], correct:[0], desc:"💡 Vantagem: Economize tempo criando materiais para clientes e leads."},
-  {q:"Pode o Reborn AI enviar mensagens em massa pelo WhatsApp?", a:["Sim","Não","Apenas Email","Não aplica"], correct:[0], desc:"💡 Vantagem: Alcance milhares de clientes de forma automática."}
-];
-let qIndex=0;
-const quizQ = document.getElementById('quizQuestion');
-const quizO = document.getElementById('quizOptions');
-const quizD = document.getElementById('quizDesc');
-
-function loadQuestion(){
-  quizD.style.opacity = 0;
-  quizQ.innerHTML = questions[qIndex].q;
-  quizO.innerHTML = "";
-  questions[qIndex].a.forEach((opt,i)=>{
-    const btn = document.createElement('button');
-    btn.innerText = opt;
-    btn.onclick = ()=>{showNext(i)};
-    quizO.appendChild(btn);
-  });
+// Quiz
+function checkAnswer(ans){
+  const feedback = document.getElementById('quizFeedback');
+  if(ans==='a'){
+    feedback.textContent = "✅ Correto! O Reborn AI automatiza vendas, comunicação e muito mais.";
+  } else{
+    feedback.textContent = "❌ Errado! Tente novamente.";
+  }
 }
-function showNext(i){
-  const correct = questions[qIndex].correct.includes(i);
-  quizD.style.color = correct ? "#00ff88" : "#ff4444";
-  quizD.innerHTML = (correct ? "✅ Correcto! " : "❌ Incorreto! ") + questions[qIndex].desc;
-  quizD.style.opacity = 1;
-  qIndex++;
-  setTimeout(()=>{
-    if(qIndex < questions.length){
-      loadQuestion();
-    } else {
-      quizQ.innerHTML="🎉 Terminou o quiz! Explore e experimente o Reborn AI!";
-      quizO.innerHTML="";
-      quizD.style.opacity = 0;
-    }
-  },2000);
-}
-loadQuestion();
 </script>
+
 </body>
 </html>
