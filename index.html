@@ -5,32 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reborn AI</title>
 <style>
-  body { margin:0; font-family: Arial, sans-serif; background:#111; color:#eee; overflow-x:hidden; }
+  body { margin:0; font-family: Arial, sans-serif; background:#111; color:#eee; }
+  main, footer, .extras { display:none; }
   header { background:#0a0a0a; color:white; padding:30px 20px; text-align:center; }
-  main, .video-container, .slideshow, .quiz, footer, audio, #popup { display:none; }
   #loginScreen { display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column; }
   #loginScreen input { padding:10px; font-size:16px; border-radius:6px; border:none; margin:10px; }
   #loginScreen button { padding:10px 20px; font-size:16px; border:none; border-radius:8px; background:#0a74da; color:white; cursor:pointer; transition:0.3s; }
   #loginScreen button:hover { background:#065bb5; transform:scale(1.05); }
-  .video-container { position:relative; width:100%; max-width:720px; margin:auto; opacity:0; animation: fadeIn 2s forwards; }
-  .video-container iframe { width:100%; height:400px; border:none; border-radius:12px; }
-  .slideshow { display:flex; overflow:hidden; gap:10px; margin:20px 0; position:relative; }
+  .extras { max-width:1200px; margin:auto; padding:20px; }
+  .slideshow { display:flex; overflow:hidden; gap:10px; margin:20px 0; }
   .slideshow img { width:100%; max-width:300px; height:200px; object-fit:cover; border-radius:12px; flex-shrink:0; transition: transform 1s ease, opacity 1s ease; opacity:0; transform:translateY(20px); }
   .caption { text-align:center; font-size:1.2rem; margin:10px 0; height:2rem; opacity:0; transition:opacity 0.5s; }
-  .quiz { margin:40px 0; }
-  .quiz h2 { margin-bottom:20px; font-size:1.8rem; text-align:center; }
+  .quiz { margin:40px 0; text-align:center; }
   .quiz button { display:block; margin:10px auto; padding:15px 25px; border:none; border-radius:8px; background:#0a74da; color:white; cursor:pointer; font-size:1rem; transition:0.3s; width:80%; max-width:300px; }
   .quiz button:hover { background:#065bb5; transform:scale(1.05); }
-  footer { text-align:center; padding:30px; background:#0a0a0a; color:white; margin-top:50px; border-top:2px solid #222; display:none; }
+  footer { text-align:center; padding:30px; background:#0a0a0a; color:white; margin-top:50px; border-top:2px solid #222; }
   audio { width:100%; margin:20px 0; border-radius:12px; }
-  /* Popup */
-  #popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:1000; }
-  #popup div { background:#111; color:white; padding:30px; border-radius:12px; max-width:400px; text-align:center; transform:scale(0.7); opacity:0; transition:0.5s; }
-  #popup.show div { transform:scale(1); opacity:1; }
-  #popup input { width:80%; padding:10px; margin:10px 0; border-radius:6px; border:none; }
-  #popup button { padding:10px 20px; border:none; border-radius:8px; background:#0a74da; color:white; cursor:pointer; margin:5px; transition:0.3s; }
-  #popup button:hover { background:#065bb5; transform:scale(1.05); }
-  @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 </style>
 </head>
 <body>
@@ -43,90 +33,66 @@
   <p id="loginMessage" style="color:red;"></p>
 </div>
 
+<!-- Conteúdo principal -->
 <main>
-  <!-- Música de fundo -->
-  <audio id="bgMusic" autoplay loop controls>
-    <source src="Sem título (22).mp3" type="audio/mpeg">
-    O seu navegador não suporta o elemento de áudio.
-  </audio>
+  <header>
+    <h1>Reborn AI</h1>
+    <p>O teu assistente de inteligência artificial multifuncional</p>
+  </header>
 
-  <!-- Vídeo visual apenas -->
-  <div class="video-container">
-    <iframe src="https://www.youtube.com/embed/bO7UM84vCQ4?mute=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-
-  <!-- Slideshow cinematográfico -->
-  <div class="slideshow" id="slideshow">
-    <img src="imagem1.jpg" alt="Feature 1">
-    <img src="imagem2.jpg" alt="Feature 2">
-    <img src="imagem3.jpg" alt="Feature 3">
-  </div>
-  <div class="caption" id="caption"></div>
-
-  <!-- Quiz interativo -->
-  <div class="quiz">
-    <h2>Teste o teu conhecimento sobre Reborn AI</h2>
-    <button onclick="checkAnswer(this,true,'O Reborn AI permite enviar SMS em massa.')">O Reborn AI permite enviar SMS em massa?</button>
-    <button onclick="checkAnswer(this,true,'O Reborn AI pode criar websites.')">O Reborn AI pode criar websites?</button>
-    <button onclick="checkAnswer(this,true,'O Reborn AI tem integração com WhatsApp e Email.')">O Reborn AI tem integração com WhatsApp e Email?</button>
-  </div>
-
-  <!-- Botão de ação / funil -->
+  <!-- Botão Reborn AI -->
   <div style="text-align:center; margin:40px 0;">
-    <a href="https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/" target="_blank" style="text-decoration:none;">
-      <button style="padding:15px 30px; font-size:18px; border:none; border-radius:10px; background:#0a74da; color:white; cursor:pointer; transition:0.3s;">Entrar / Experimentar Reborn AI</button>
+    <a href="https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/" target="_blank">
+      <button style="padding:15px 30px; font-size:18px; border:none; border-radius:10px; background:#0a74da; color:white; cursor:pointer; transition:0.3s;">
+        Entrar / Experimentar Reborn AI
+      </button>
     </a>
+  </div>
+
+  <!-- Extras visuais opcionais -->
+  <div class="extras">
+    <!-- Música de fundo -->
+    <audio autoplay loop controls>
+      <source src="Sem título (22).mp3" type="audio/mpeg">
+      O seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <!-- Slideshow -->
+    <div class="slideshow" id="slideshow">
+      <img src="imagem1.jpg" alt="Feature 1">
+      <img src="imagem2.jpg" alt="Feature 2">
+      <img src="imagem3.jpg" alt="Feature 3">
+    </div>
+    <div class="caption" id="caption"></div>
+
+    <!-- Quiz opcional -->
+    <div class="quiz">
+      <h2>Teste o teu conhecimento sobre Reborn AI</h2>
+      <button onclick="checkAnswer(this,true,'O Reborn AI permite enviar SMS em massa.')">O Reborn AI permite enviar SMS em massa?</button>
+      <button onclick="checkAnswer(this,true,'O Reborn AI pode criar websites.')">O Reborn AI pode criar websites?</button>
+      <button onclick="checkAnswer(this,true,'O Reborn AI tem integração com WhatsApp e Email.')">O Reborn AI tem integração com WhatsApp e Email?</button>
+    </div>
   </div>
 </main>
 
-<!-- Popup de Funil -->
-<div id="popup">
-  <div>
-    <h2>Quer experimentar o Reborn AI?</h2>
-    <p>Deixe o seu email ou WhatsApp e nós vamos mostrar como!</p>
-    <input type="text" id="userInput" placeholder="Email ou WhatsApp">
-    <button onclick="submitLead()">Enviar</button>
-    <button onclick="closePopup()">Fechar</button>
-  </div>
-</div>
+<footer>
+  <p>© 2026 Reborn AI | Todos os direitos reservados</p>
+</footer>
 
 <script>
-  // Login Password
+  // Login
   function checkPassword() {
     const pwd = document.getElementById('passwordInput').value;
     if(pwd === 'reborn'){
       document.getElementById('loginScreen').style.display='none';
       document.querySelectorAll('main, footer').forEach(e=>e.style.display='block');
-      showPopup();
+      document.querySelectorAll('.extras').forEach(e=>e.style.display='block');
     } else {
       document.getElementById('loginMessage').textContent='Password incorreta!';
     }
   }
 
-  // Popup Funil
-  function showPopup() {
-    var popup = document.getElementById('popup');
-    popup.style.display = 'flex';
-    setTimeout(()=>popup.classList.add('show'), 50);
-    speakText("Não perca a oportunidade de experimentar o Reborn AI.");
-  }
-  function closePopup() { 
-    var popup = document.getElementById('popup'); 
-    popup.classList.remove('show');
-    setTimeout(()=>popup.style.display='none',300);
-  }
-  function submitLead() {
-    var lead = document.getElementById('userInput').value;
-    if(lead) { alert('Obrigado! Vamos contactar: ' + lead); closePopup(); }
-  }
-
-  // Quiz feedback com narração
-  function checkAnswer(btn, correct, text){
-    if(correct){ btn.style.background='green'; btn.textContent='✅ Correto!'; speakText(text); }
-    else { btn.style.background='red'; btn.textContent='❌ Errado!'; speakText("Resposta incorreta!"); }
-  }
-
-  // Slideshow automático com narração
+  // Slideshow automático
   const slides = document.querySelectorAll('#slideshow img');
   const captions = [
     "Bem-vindo ao futuro das vendas.",
@@ -141,25 +107,16 @@
     slides[current].style.opacity=1;
     slides[current].style.transform='translateY(0)';
     document.getElementById('caption').textContent = captions[current];
-    speakText(captions[current]);
     current = (current+1)%slides.length;
   }
-  nextSlide();
-  setInterval(nextSlide, 5000);
+  if(slides.length>0) { nextSlide(); setInterval(nextSlide,5000); }
 
-  // Função de Text-to-Speech
-  function speakText(text){
-    if('speechSynthesis' in window){
-      const msg = new SpeechSynthesisUtterance(text);
-      msg.lang = 'pt-PT';
-      window.speechSynthesis.speak(msg);
-    }
+  // Quiz feedback
+  function checkAnswer(btn, correct, text){
+    if(correct){ btn.style.background='green'; btn.textContent='✅ Correto!'; }
+    else { btn.style.background='red'; btn.textContent='❌ Errado!'; }
   }
 </script>
-
-<footer>
-  <p>© 2026 Reborn AI | Todos os direitos reservados</p>
-</footer>
 
 </body>
 </html>
