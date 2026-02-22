@@ -8,56 +8,38 @@
 html, body {
   margin:0;
   padding:0;
-  height:100%;
   font-family:'Helvetica',sans-serif;
-  overflow-x:hidden;
+  background:#000;
+  color:#fff;
 }
 
 body {
-  background:#000;
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  position:relative;
-  padding-top:20px;
-}
-
-/* YouTube background */
-#player {
-  position: fixed;
-  top:0;
-  left:0;
-  width:100vw;
-  height:100vh;
-  z-index:-1;
-  pointer-events:none;
-  object-fit:cover;
-}
-
-/* Partículas */
-#particles {
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:0;
+  flex-direction:column;
+  padding:20px;
 }
 
 /* Conteúdo principal */
 .login-box {
   position: relative;
   background: rgba(0,0,0,0.85);
-  padding: 30px;
-  border-radius: 25px;
-  text-align: center;
-  max-width: 600px;
-  width: 92%;
-  box-shadow: 0 0 60px #00ffff;
-  z-index:1;
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 700px;
+  width: 95%;
+  margin:auto;
+  box-shadow: 0 0 40px #00ffff;
   display:flex;
   flex-direction:column;
   align-items:center;
+  animation:fadeInBox 1.5s ease-out;
+}
+
+@keyframes fadeInBox{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
 /* Logo */
@@ -83,17 +65,46 @@ body {
   border-radius:15px;
   overflow:hidden;
   margin-bottom:20px;
+  position:relative;
 }
 
 .slideshow img {
   width:100%;
-  display:none;
   border-radius:15px;
   object-fit:cover;
+  position:absolute;
+  top:0;
+  left:0;
+  opacity:0;
+  transition:opacity 1s ease-in-out;
 }
 
 .slideshow img.active {
-  display:block;
+  opacity:1;
+}
+
+/* Vídeo publicidade */
+.video-container{
+  width:100%;
+  position:relative;
+  padding-bottom:177%; /* Shorts vertical */
+  margin-bottom:20px;
+  animation:fadeInVideo 2s ease-out;
+}
+
+.video-container iframe{
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  border:none;
+  border-radius:15px;
+}
+
+@keyframes fadeInVideo{
+  from{opacity:0; transform:scale(0.95);}
+  to{opacity:1; transform:scale(1);}
 }
 
 /* Títulos e textos */
@@ -207,28 +218,22 @@ button:hover{
   margin-bottom:10px;
 }
 
-.quiz-container button{
-  margin-top:10px;
-}
-
 /* Responsividade */
 @media (max-width:600px){
-  .login-box{padding:20px;}
-  .logo-text{font-size:1.6rem;}
-  h1{font-size:1.4rem;}
+  .login-box{padding:15px;}
+  .logo-text{font-size:1.5rem;}
+  h1{font-size:1.3rem;}
   #rebornaisDesc{font-size:0.9rem;}
   p{font-size:0.85rem;}
   .slideshow{max-height:180px;}
   .slideshow img{max-height:180px;}
   .new-price{font-size:1.6rem;}
   input[type="password"], button{padding:10px; font-size:0.9rem;}
+  .video-container{padding-bottom:220%;}
 }
 </style>
 </head>
 <body>
-
-<div id="player"></div>
-<div id="particles"></div>
 
 <div class="login-box">
 
@@ -238,6 +243,10 @@ button:hover{
   <img src="https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg" class="active">
   <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg">
   <img src="https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg">
+</div>
+
+<div class="video-container">
+  <iframe src="https://www.youtube.com/embed/bO7UM84vCQ4?autoplay=1&mute=0&loop=1&playlist=bO7UM84vCQ4&controls=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 <h1>Hora de Vender 🚀</h1>
@@ -270,80 +279,15 @@ button:hover{
 <p id="quizFeedback" style="color:#00ff88;font-weight:bold;margin-top:10px;"></p>
 </div>
 
-<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-// YouTube API
-let player;
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player', {
-    videoId: 'bO7UM84vCQ4', // Shorts ID
-    width: '100%',
-    height: '100%',
-    playerVars: {
-      autoplay: 1,
-      controls: 0,
-      mute: 0,
-      loop: 1,
-      playlist: 'bO7UM84vCQ4',
-      modestbranding: 1,
-      rel: 0,
-      showinfo: 0
-    },
-    events: {
-      onReady: (e) => {
-        e.target.setVolume(60);
-        e.target.playVideo();
-      }
-    }
-  });
-}
-
-// Slideshow
+// Slideshow com fade
 let slides = document.querySelectorAll(".slideshow img");
 let current = 0;
 setInterval(()=>{
-  slides[current].classList.remove("active");
+  slides.forEach(s => s.classList.remove("active"));
   current = (current+1)%slides.length;
   slides[current].classList.add("active");
 },4000);
-
-// Partículas
-const canvas=document.createElement('canvas');
-document.getElementById('particles').appendChild(canvas);
-const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-window.addEventListener('resize',()=>{
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight;
-});
-let particles=[];
-for(let i=0;i<80;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*2+1,
-    dx:(Math.random()-0.5)*0.5,
-    dy:(Math.random()-0.5)*0.5
-  });
-}
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="#00ffff";
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
-    p.x+=p.dx;
-    p.y+=p.dy;
-    if(p.x<0)p.x=canvas.width;
-    if(p.x>canvas.width)p.x=0;
-    if(p.y<0)p.y=canvas.height;
-    if(p.y>canvas.height)p.y=0;
-  });
-  requestAnimationFrame(draw);
-}
-draw();
 
 // Password
 document.getElementById('loginForm').addEventListener('submit', function(e){
