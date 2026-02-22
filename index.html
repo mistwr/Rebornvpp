@@ -3,111 +3,132 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reborn AI</title>
+<title>Reborn AI VIP Épico</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-body, html {margin:0;padding:0;font-family:'Roboto',sans-serif;background:#0f0f0f;color:#fff;overflow-x:hidden;}
-header {text-align:center;padding:40px 20px;background:#111;}
-header h1 {color:#00d4ff;font-size:3em;margin:0;letter-spacing:1px;}
-header p {font-size:1.2em;color:#ccc;}
-.slideshow {position:relative;width:90%;max-width:1000px;margin:30px auto;overflow:hidden;border-radius:15px;box-shadow:0 0 30px rgba(0,0,0,0.5);}
-.slideshow img {width:100%;display:none;border-radius:15px;transition:all 1s ease;}
-.slideshow img.active {display:block;animation:fadeIn 1.5s;}
-@keyframes fadeIn {from{opacity:0} to{opacity:1}}
-.music-toggle {position:fixed;top:20px;right:20px;background:#00d4ff;color:#000;border:none;padding:12px;border-radius:50%;cursor:pointer;z-index:1000;font-size:18px;box-shadow:0 0 15px #00d4ff;}
-.content {text-align:center;padding:30px 20px;}
-.buttons {margin:30px auto;display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
-.buttons a {display:block;padding:15px 25px;font-size:1.1em;background:#ff9800;color:#000;text-decoration:none;font-weight:700;border-radius:10px;transition:0.3s;}
-.buttons a:hover {background:#f57c00;color:#fff;}
-.quiz {margin:40px auto;text-align:center;}
-.quiz h3 {font-size:1.5em;margin-bottom:20px;color:#00d4ff;}
-.quiz button {display:block;margin:10px auto;padding:12px 25px;background:#00d4ff;color:#000;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:0.3s;font-size:1.1em;}
-.quiz button:hover {background:#00a0cc;color:#fff;}
-.password-overlay {position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:2000;transition:all 0.5s;}
-.password-overlay input {padding:12px;font-size:1.1em;margin-bottom:15px;border-radius:8px;border:none;width:250px;text-align:center;}
-.password-overlay button {padding:12px 25px;font-size:1.1em;background:#00d4ff;color:#000;border:none;border-radius:10px;cursor:pointer;transition:0.3s;}
-.password-overlay button:hover {background:#00a0cc;color:#fff;}
-footer {text-align:center;padding:20px;background:#111;color:#888;margin-top:50px;}
+* {margin:0; padding:0; box-sizing:border-box;}
+body, html {font-family:'Roboto',sans-serif; background:#0f0f0f; color:#fff; overflow-x:hidden; scroll-behavior:smooth;}
+a {text-decoration:none;}
+header {position:relative; text-align:center; padding:50px 20px; z-index:1;}
+header h1 {font-size:3em; color:#0ff; letter-spacing:2px; text-shadow:0 0 20px #00f;}
+header p {font-size:1.2em; color:#e0e0e0; margin-top:10px;}
+.slideshow {position:relative; max-width:1100px; margin:30px auto; border-radius:20px; overflow:hidden; box-shadow:0 0 40px rgba(0,0,0,0.7);}
+.slideshow img {width:100%; display:none; border-radius:20px; transition:all 1s ease, box-shadow 1s ease;}
+.slideshow img.active {display:block; box-shadow:0 0 30px #0ff;}
+.music-toggle {position:fixed; top:25px; right:25px; background:#0ff; color:#000; border:none; padding:15px; border-radius:50%; cursor:pointer; z-index:1000; font-size:20px; box-shadow:0 0 20px #0ff; transition:0.3s;}
+.music-toggle:hover {transform:scale(1.1);}
+.password-overlay {position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.98); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:2000; text-align:center;}
+.password-overlay input {padding:15px; font-size:1.2em; margin-bottom:20px; border-radius:10px; border:none; width:300px; text-align:center;}
+.password-overlay button {padding:15px 30px; font-size:1.2em; background:#0ff; color:#000; border:none; border-radius:10px; cursor:pointer; font-weight:700;}
+.password-overlay button:hover {background:#00cfff;}
+.content {max-width:1200px; margin:50px auto; text-align:center; padding:0 20px;}
+.content h2 {font-size:2.5em; color:#0ff; margin-bottom:30px; text-shadow:0 0 15px #00f;}
+.buttons {display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin-bottom:50px;}
+.buttons a {display:block; background:#ff9800; color:#000; font-weight:700; padding:20px 35px; border-radius:15px; font-size:1.2em; box-shadow:0 0 20px #ff9800; transition:0.5s, box-shadow 0.5s, transform 0.5s; opacity:0; transform:scale(0.7);}
+.buttons a.show {opacity:1; transform:scale(1);}
+.buttons a:hover {background:#f57c00; color:#fff; transform:scale(1.1); box-shadow:0 0 35px #ff9800;}
+.plan-desc {color:#ccc; margin-top:10px; font-size:1em; max-width:250px;}
+.quiz {margin-top:60px;}
+.quiz h3 {font-size:2em; color:#0ff; margin-bottom:25px; text-shadow:0 0 15px #00f;}
+.quiz button {display:block; margin:15px auto; padding:15px 30px; font-size:1.2em; border:none; border-radius:12px; background:#0ff; color:#000; font-weight:700; cursor:pointer; box-shadow:0 0 20px #0ff; transition:0.3s, box-shadow 0.3s;}
+.quiz button:hover {transform:scale(1.05); background:#00cfff; color:#fff; box-shadow:0 0 25px #0ff;}
+footer {text-align:center; padding:25px; background:#111; color:#888; margin-top:60px; font-size:0.95em;}
+@media(max-width:768px){header h1{font-size:2.2em;} .content h2{font-size:2em;} .buttons{flex-direction:column; gap:20px;} .buttons a{max-width:90%; margin:auto;} .quiz h3{font-size:1.7em;}}
 </style>
 </head>
 <body>
 
-<!-- Música -->
 <button class="music-toggle" onclick="toggleMusic()">🔊</button>
 <audio id="bgMusic" autoplay loop>
   <source src="Music reborninstru.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Password Overlay -->
 <div id="passwordOverlay" class="password-overlay">
   <h2>Insira a password para aceder ao Reborn AI</h2>
   <input type="password" id="passwordInput" placeholder="Password">
   <button onclick="checkPassword()">Entrar</button>
-  <p style="color:#888;margin-top:10px;">Teaser: Criação de sites, envio de SMS, Emails, WhatsApp, Marketing digital, Slides e Ebooks.</p>
 </div>
 
-<header>
-  <h1>Reborn AI</h1>
-  <p>O teu assistente de inteligência artificial multifuncional.</p>
+<header id="header">
+  <h1>Reborn AI VIP Épico</h1>
+  <p>O teu assistente de inteligência artificial multifuncional premium.</p>
 </header>
 
-<!-- Slideshow -->
-<div class="slideshow">
+<div class="slideshow" id="slideshow">
   <img src="Webcraft.png" class="active">
   <img src="Sms e whatsapp.png">
   <img src="Ebooks .png">
   <img src="Email markting.png">
   <img src="Leads e sms.png">
   <img src="Logoreborn.png">
-  <img src="Chat inteligente.png">
 </div>
 
-<div class="content">
-  <h2>Escolhe o teu plano</h2>
-  <div class="buttons">
-    <a href="https://buy.stripe.com/eVqdR93RbaHQ4ecbk95Rm00">Basic 9,99€ - Funções básicas</a>
-    <a href="https://buy.stripe.com/cNi4gz1J36rA264gEt5Rm06">Pro 69,99€ - APIs Incluídas, Funcionalidades Avançadas</a>
-    <a href="https://buy.stripe.com/5kQfZhbjDeY66mk87X5Rm07">Enterprise Pro - Completo, Suporte Premium</a>
+<div class="content" id="content">
+  <h2>Escolhe o teu plano Reborn AI</h2>
+  <div class="buttons" id="planButtons">
+    <div>
+      <a href="https://buy.stripe.com/eVqdR93RbaHQ4ecbk95Rm00">Basic 9,99€</a>
+      <p class="plan-desc">Funções básicas: Sites limitados, envio de Emails e SMS, acesso ao quiz interativo.</p>
+    </div>
+    <div>
+      <a href="https://buy.stripe.com/cNi4gz1J36rA264gEt5Rm06">Pro 69,99€</a>
+      <p class="plan-desc">Inclui APIs, envio ilimitado de SMS/Emails, múltiplos sites, ferramentas avançadas e suporte prioritário.</p>
+    </div>
+    <div>
+      <a href="https://buy.stripe.com/5kQfZhbjDeY66mk87X5Rm07">Enterprise Pro</a>
+      <p class="plan-desc">Suporte premium 24/7, integrações avançadas, relatórios detalhados, funcionalidades ilimitadas.</p>
+    </div>
   </div>
 
-  <div class="quiz">
-    <h3>Teste rápido Reborn AI</h3>
-    <button onclick="alert('Correto! O Reborn AI cria websites.')">O Reborn AI pode criar websites?</button>
-    <button onclick="alert('Correto! O Reborn AI envia SMS e Emails.')">O Reborn AI envia SMS e Emails?</button>
-    <button onclick="alert('Correto! O Reborn AI possui Modo Live.')">O Reborn AI possui Modo Live?</button>
+  <div class="quiz" id="quiz">
+    <h3>Teste rápido Reborn AI (opcional)</h3>
+    <button onclick="quizAnswer(true)">O Reborn AI pode criar websites?</button>
+    <button onclick="quizAnswer(true)">O Reborn AI envia SMS e Emails?</button>
+    <button onclick="quizAnswer(true)">O Reborn AI possui Modo Live?</button>
+    <p id="quizFeedback" style="margin-top:20px;color:#0ff;"></p>
   </div>
 </div>
 
 <footer>
-  © 2026 Reborn AI | Todos os direitos reservados
+  © 2026 Reborn AI VIP | Todos os direitos reservados
 </footer>
 
 <script>
 // Slideshow
 let slides = document.querySelectorAll('.slideshow img');
 let current = 0;
-setInterval(() => {
-  slides[current].classList.remove('active');
-  current = (current+1)%slides.length;
-  slides[current].classList.add('active');
-}, 5000);
+setInterval(()=>{slides[current].classList.remove('active');current=(current+1)%slides.length;slides[current].classList.add('active');},5000);
 
-// Música toggle
+// Música
 let music = document.getElementById('bgMusic');
-function toggleMusic() {
-  if(music.paused) music.play();
-  else music.pause();
+function toggleMusic(){music.paused?music.play():music.pause();}
+
+// Password
+function checkPassword(){
+  let pass=document.getElementById('passwordInput').value;
+  if(pass.toLowerCase()==='reborn'){document.getElementById('passwordOverlay').style.display='none'; animateButtons();}
+  else{alert('Password incorreta');}
 }
 
-// Password check
-function checkPassword() {
-  let pass = document.getElementById('passwordInput').value;
-  if(pass.toLowerCase() === 'reborn') {
-    document.getElementById('passwordOverlay').style.display='none';
+// Quiz interativo
+function quizAnswer(correct){
+  if(correct){
+    document.getElementById('quizFeedback').innerText='Correto! Podes prosseguir com a tua escolha de plano.';
   } else {
-    alert('Password incorreta');
+    document.getElementById('quizFeedback').innerText='Resposta incorreta, tenta novamente.';
   }
 }
+
+// Animação dos botões
+function animateButtons(){
+  let buttons = document.querySelectorAll('#planButtons a');
+  buttons.forEach((btn,i)=>{
+    setTimeout(()=>{btn.classList.add('show');}, i*200);
+  });
+}
+
+// Mostrar buttons já na carga da página
+window.addEventListener('load', animateButtons);
 </script>
 
 </body>
