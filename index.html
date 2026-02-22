@@ -3,47 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reborn AI VIP Épico</title>
+<title>Reborn AI VIP</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-* {margin:0; padding:0; box-sizing:border-box;}
-body, html {font-family:'Roboto', sans-serif; background:#0f0f0f; color:#fff; overflow-x:hidden; scroll-behavior:smooth;}
-a {text-decoration:none;}
-header {text-align:center; padding:50px 20px; position:relative; opacity:0; animation:fadeIn 1.5s forwards;}
-header h1 {font-size:3em; color:#0ff; text-shadow:0 0 20px #00f;}
-header p {font-size:1.2em; color:#e0e0e0; margin-top:10px;}
-@keyframes fadeIn {from{opacity:0; transform:translateY(-20px);} to{opacity:1; transform:translateY(0);}}
-
-.music-toggle {position:fixed; top:25px; right:25px; background:#0ff; color:#000; border:none; padding:15px; border-radius:50%; cursor:pointer; z-index:1000; font-size:20px; box-shadow:0 0 20px #0ff; transition:0.3s;}
-.music-toggle:hover {transform:scale(1.1);}
-
-.slideshow {position:relative; max-width:1100px; margin:50px auto; border-radius:20px; overflow:hidden; box-shadow:0 0 40px rgba(0,0,0,0.7);}
-.slideshow img {width:100%; display:none; border-radius:20px; transition:all 1s ease, box-shadow 1s ease;}
-.slideshow img.active {display:block; box-shadow:0 0 30px #0ff; animation:glowPulse 5s infinite alternate;}
-@keyframes glowPulse {0% {box-shadow:0 0 20px #0ff;} 100% {box-shadow:0 0 50px #0ff;}}
-
-.content {max-width:1200px; margin:50px auto; text-align:center; padding:0 20px;}
-.content h2 {font-size:2.5em; color:#0ff; margin-bottom:30px; text-shadow:0 0 15px #00f; opacity:0; animation:fadeIn 1.5s forwards 0.5s;}
-.buttons {display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin-bottom:50px;}
-.buttons div {max-width:300px;}
-.buttons a {display:block; background:#ff9800; color:#000; font-weight:700; padding:20px 35px; border-radius:15px; font-size:1.2em; box-shadow:0 0 20px #ff9800; transition:0.5s, box-shadow 0.5s, transform 0.5s;}
-.buttons a:hover {background:#f57c00; color:#fff; transform:scale(1.1); box-shadow:0 0 35px #ff9800; animation:buttonPulse 1s infinite alternate;}
-@keyframes buttonPulse {0%{box-shadow:0 0 35px #ff9800;}100%{box-shadow:0 0 50px #ff9800;}}
-.plan-desc {color:#ccc; margin-top:10px; font-size:1em;}
-
-.password-overlay {position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:2000; text-align:center;}
-.password-overlay input {padding:15px; font-size:1.2em; margin-bottom:20px; border-radius:10px; border:none; width:300px; text-align:center;}
-.password-overlay button {padding:15px 30px; font-size:1.2em; background:#0ff; color:#000; border:none; border-radius:10px; cursor:pointer; font-weight:700;}
-.password-overlay button:hover {background:#00cfff;}
-
-footer {text-align:center; padding:20px; color:#888; font-size:0.9em;}
-
-.quiz-section {margin-top:50px; text-align:center;}
-.quiz-section h2 {color:#0ff; text-shadow:0 0 15px #00f;}
-.quiz-section p {color:#ccc; margin-bottom:20px;}
-.quiz-section button {background:#ff9800; color:#000; border:none; padding:10px 20px; margin:5px; border-radius:10px; cursor:pointer; font-weight:700; transition:0.3s;}
-.quiz-section button:hover {background:#f57c00; color:#fff; transform:scale(1.05);}
-
+*{margin:0; padding:0; box-sizing:border-box;}
+body, html{font-family:'Roboto',sans-serif; background:#0f0f0f; color:#fff; overflow-x:hidden; scroll-behavior:smooth;}
+a{text-decoration:none;}
+header{text-align:center; padding:50px 20px;}
+header h1{font-size:3em; color:#0ff; text-shadow:0 0 20px #00f;}
+header p{font-size:1.2em; color:#e0e0e0; margin-top:10px;}
+.music-toggle{position:fixed; top:25px; right:25px; background:#0ff; color:#000; border:none; padding:15px; border-radius:50%; cursor:pointer; z-index:1000; font-size:20px; box-shadow:0 0 20px #0ff; transition:0.3s;}
+.music-toggle:hover{transform:scale(1.1);}
+.login-inline{text-align:center; margin:20px auto;}
+.login-inline input{padding:12px; font-size:1em; border-radius:10px; border:none; margin-right:10px; width:200px;}
+.login-inline button{padding:12px 20px; font-size:1em; border-radius:10px; border:none; background:#0ff; color:#000; font-weight:700; cursor:pointer;}
+.slideshow{position:relative; max-width:1100px; margin:50px auto; border-radius:20px; overflow:hidden; box-shadow:0 0 40px rgba(0,0,0,0.7);}
+.slideshow img{width:100%; display:none; border-radius:20px; transition:all 1s ease;}
+.slideshow img.active{display:block; box-shadow:0 0 30px #0ff; animation:glowPulse 5s infinite alternate;}
+@keyframes glowPulse{0% {box-shadow:0 0 20px #0ff;} 100% {box-shadow:0 0 50px #0ff;}}
+.content{max-width:1200px; margin:50px auto; text-align:center; padding:0 20px;}
+.content h2{font-size:2.5em; color:#0ff; margin-bottom:30px; text-shadow:0 0 15px #00f;}
+.buttons{display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin-bottom:50px;}
+.buttons div{max-width:300px;}
+.buttons a{display:block; background:#ff9800; color:#000; font-weight:700; padding:20px 35px; border-radius:15px; font-size:1.2em; box-shadow:0 0 20px #ff9800; transition:0.5s, box-shadow 0.5s, transform 0.5s;}
+.buttons a:hover{background:#f57c00; color:#fff; transform:scale(1.1); box-shadow:0 0 35px #ff9800;}
+.plan-desc{color:#ccc; margin-top:10px; font-size:1em;}
+.quiz-section{margin-top:50px; text-align:center;}
+.quiz-section h2{color:#0ff; text-shadow:0 0 15px #00f;}
+.quiz-section p{color:#ccc; margin-bottom:20px;}
+.quiz-section button{background:#ff9800; color:#000; border:none; padding:10px 20px; margin:5px; border-radius:10px; cursor:pointer; font-weight:700; transition:0.3s;}
+.quiz-section button:hover{background:#f57c00; color:#fff; transform:scale(1.05);}
 @media(max-width:768px){header h1{font-size:2.2em;} .content h2{font-size:2em;} .buttons{flex-direction:column; gap:20px;} .buttons div{max-width:90%; margin:auto;}}
 </style>
 </head>
@@ -54,17 +43,18 @@ footer {text-align:center; padding:20px; color:#888; font-size:0.9em;}
   <source src="Music reborninstru.mp3" type="audio/mpeg">
 </audio>
 
-<div id="passwordOverlay" class="password-overlay">
-  <h2>Insira a password para aceder ao Reborn AI</h2>
-  <input type="password" id="passwordInput" placeholder="Password">
-  <button onclick="checkPassword()">Entrar</button>
-</div>
-
 <header>
   <h1>Reborn AI VIP</h1>
   <p>O teu assistente de inteligência artificial multifuncional premium</p>
 </header>
 
+<!-- Login Inline -->
+<div class="login-inline">
+  <input type="password" id="passwordInput" placeholder="Password">
+  <button onclick="checkPassword()">Entrar</button>
+</div>
+
+<!-- Slideshow -->
 <div class="slideshow" id="slideshow">
   <img src="Webcraft.png" class="active">
   <img src="Sms e whatsapp.png">
@@ -95,7 +85,6 @@ footer {text-align:center; padding:20px; color:#888; font-size:0.9em;}
   <div class="quiz-section">
     <h2>Teste rápido: Escolha o plano certo para si!</h2>
     <p>Responda a estas perguntas e veja qual plano Reborn AI se adapta melhor ao seu uso.</p>
-
     <div id="quiz" style="max-width:700px; margin:auto;">
       <div class="question" style="margin-bottom:20px;">
         <p>1. Quantos sites pretende criar?</p>
@@ -118,7 +107,6 @@ footer {text-align:center; padding:20px; color:#888; font-size:0.9em;}
       <div id="quizResult" style="margin-top:20px; color:#0ff; font-size:1.2em; font-weight:700;"></div>
     </div>
   </div>
-
 </div>
 
 <footer>
@@ -127,37 +115,34 @@ footer {text-align:center; padding:20px; color:#888; font-size:0.9em;}
 
 <script>
 // Slideshow
-let slides = document.querySelectorAll('.slideshow img');
-let current = 0;
-setInterval(()=>{
-  slides[current].classList.remove('active');
-  current = (current +1) % slides.length;
-  slides[current].classList.add('active');
-},5000);
+let slides=document.querySelectorAll('.slideshow img');
+let current=0;
+setInterval(()=>{slides[current].classList.remove('active'); current=(current+1)%slides.length; slides[current].classList.add('active');},5000);
 
 // Música
-let music = document.getElementById('bgMusic');
+let music=document.getElementById('bgMusic');
 function toggleMusic(){music.paused?music.play():music.pause();}
 
-// Password -> redireciona para Reborn AI
+// Login Inline -> apenas alerta correto e mantém site visível
 function checkPassword(){
-  let pass = document.getElementById('passwordInput').value;
-  if(pass.toLowerCase() === 'reborn'){
-    window.location.href = 'https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
-  } else {
+  let pass=document.getElementById('passwordInput').value;
+  if(pass.toLowerCase()==='reborn'){
+    alert('Password correta! Pode aceder ao Reborn AI.');
+    window.location.href='https://v0-ai-gateway-starter-zetaa-oneee.vercel.app/';
+  } else{
     alert('Password incorreta');
   }
 }
 
 // Quiz
-let answersCount = {Basic:0, Pro:0, Enterprise:0};
+let answersCount={Basic:0,Pro:0,Enterprise:0};
 function selectAnswer(plan){
   answersCount[plan]++;
-  let questions = document.querySelectorAll('.question');
-  let answered = Object.values(answersCount).reduce((a,b)=>a+b,0);
-  if(answered >= questions.length){
-    let recommended = Object.keys(answersCount).reduce((a,b)=>answersCount[a]>=answersCount[b]?a:b);
-    document.getElementById('quizResult').innerHTML = "Plano recomendado: "+recommended+" ✅ Escolha abaixo para comprar!";
+  let questions=document.querySelectorAll('.question');
+  let answered=Object.values(answersCount).reduce((a,b)=>a+b,0);
+  if(answered>=questions.length){
+    let recommended=Object.keys(answersCount).reduce((a,b)=>answersCount[a]>=answersCount[b]?a:b);
+    document.getElementById('quizResult').innerHTML="Plano recomendado: "+recommended+" ✅ Escolha abaixo para comprar!";
   }
 }
 </script>
